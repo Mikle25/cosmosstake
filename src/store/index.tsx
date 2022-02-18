@@ -19,7 +19,7 @@ const { Provider } = store;
 const StoreProvider: FC = ({ children }) => {
     const [chain, setChain] = useState<any>();
     const [account, setAcc] = useState();
-    const [balance, setBal] = useState();
+    const [balance, setBal] = useState<number>(0);
 
     const setBalance = async (
         address: string,
@@ -28,7 +28,9 @@ const StoreProvider: FC = ({ children }) => {
         try {
             const bal = await handleBalance(address);
 
-            setBal(bal.data.balances[0]);
+            if (bal.data.balances[0]) {
+                setBal(bal.data.balances[0]);
+            }
         } catch (e: any) {
             console.error(e);
         }

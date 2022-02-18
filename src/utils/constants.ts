@@ -14,7 +14,7 @@ export const CHAIN_LIST_MAINNET: IChainList[] = [
         chainId: 'osmosis',
         coinMinimalDenom: 'uosmo',
         coinDenom: 'OSMO',
-        rest: 'https://lcd-osmosis.keplr.app',
+        rest: 'https://ki.api.ping.pub',
         rpc: 'https://rpc-osmosis.itastakers.com',
     },
     {
@@ -33,7 +33,9 @@ export const CHAIN_LIST_TESTNET = [
         chainId: 'vega-testnet',
         coinMinimalDenom: 'uatom',
         coinDenom: 'ATOM',
-        rest: 'http://198.50.215.1:3327',
+        // rest: 'http://198.50.215.1:3327',
+        rest: 'https://vega.api.ping.pub',
+        // rpc: 'http://198.50.215.1:36657',
         rpc: 'http://198.50.215.1:36657',
     },
     {
