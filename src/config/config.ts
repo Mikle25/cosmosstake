@@ -3,6 +3,40 @@ import { Bech32Address } from '@keplr-wallet/cosmos';
 
 export const ChainInfos: ChainInfo[] = [
     {
+        rpc: 'https://rpc-cosmoshub.keplr.app',
+        rest: 'https://lcd-cosmoshub.keplr.app',
+        chainId: 'cosmoshub-4',
+        chainName: 'Cosmos Hub',
+        stakeCurrency: {
+            coinDenom: 'ATOM',
+            coinMinimalDenom: 'uatom',
+            coinDecimals: 6,
+            coinGeckoId: 'cosmos',
+        },
+        bip44: {
+            coinType: 118,
+        },
+        bech32Config: Bech32Address.defaultBech32Config('cosmos'),
+        currencies: [
+            {
+                coinDenom: 'ATOM',
+                coinMinimalDenom: 'uatom',
+                coinDecimals: 6,
+                coinGeckoId: 'cosmos',
+            },
+        ],
+        feeCurrencies: [
+            {
+                coinDenom: 'ATOM',
+                coinMinimalDenom: 'uatom',
+                coinDecimals: 6,
+                coinGeckoId: 'cosmos',
+            },
+        ],
+        coinType: 118,
+        features: ['stargate', 'ibc-transfer', 'no-legacy-stdTx', 'ibc-go'],
+    },
+    {
         chainId: 'vega-testnet',
         chainName: 'vega-testnet',
         rpc: 'http://198.50.215.1:36657',
@@ -111,5 +145,38 @@ export const ChainInfos: ChainInfo[] = [
             average: 0.025,
             high: 0.04,
         },
+    },
+    {
+        rpc: 'https://rpc-mainnet.blockchain.ki',
+        rest: 'https://api-mainnet.blockchain.ki',
+        chainId: 'kichain-2',
+        chainName: 'Ki',
+        stakeCurrency: {
+            coinDenom: 'XKI',
+            coinMinimalDenom: 'uxki',
+            coinDecimals: 6,
+            coinGeckoId: 'pool:uxki',
+        },
+        bip44: {
+            coinType: 118,
+        },
+        bech32Config: Bech32Address.defaultBech32Config('ki'),
+        currencies: [
+            {
+                coinDenom: 'XKI',
+                coinMinimalDenom: 'uxki',
+                coinDecimals: 6,
+                coinGeckoId: 'pool:uxki',
+            },
+        ],
+        feeCurrencies: [
+            {
+                coinDenom: 'XKI',
+                coinMinimalDenom: 'uxki',
+                coinDecimals: 6,
+                coinGeckoId: 'pool:uxki',
+            },
+        ],
+        features: ['stargate', 'ibc-transfer'],
     },
 ];
