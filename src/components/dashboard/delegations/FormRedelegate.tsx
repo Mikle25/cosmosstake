@@ -32,13 +32,17 @@ const FormRedelegate = ({
 }: IRedelegateProps) => {
     const { delegation, balance } = delegate;
 
-    const handleSubmit = (amount: number, validatorTo: string) => {
+    const handleSubmit = (
+        amount: number,
+        validatorTo: string,
+        denom: string,
+    ) => {
         handleRequest({
             delegator: delegation.delegator_address,
             validatorFrom: delegation.validator_address,
             validatorTo,
             amount,
-            denom: balance.denom,
+            denom,
         });
 
         handleClose();
@@ -54,7 +58,11 @@ const FormRedelegate = ({
             }}
             onSubmit={(values) => {
                 if (typeof values.amount !== 'string') {
-                    handleSubmit(values.amount, values.validatorTo);
+                    handleSubmit(
+                        values.amount,
+                        values.validatorTo,
+                        balance.denom,
+                    );
                 }
             }}
         >

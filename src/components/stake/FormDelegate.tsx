@@ -22,16 +22,12 @@ const schema = yup.object().shape({
         .number()
         .required('Required')
         // .min(0.1, 'Minimum value is 0.1')
-        .max(1000000, 'Maximum value is 1000000')
-        // .test('amount', 'Max value', (val: any, props: any) => {
-        //     if (val < 1000000) {
-        //         return true;
-        //     }
-        //     return val < props.parent.balance;
-        // })
+        .test('amount', 'Max value is your balance', (val: any, props: any) => {
+            return val < props.parent.balance;
+        })
         .test(
             'amount',
-            'Min value',
+            'Min value 1',
             (val: any, props: any) => val >= props.parent.minDelegation,
         ),
 });

@@ -33,7 +33,7 @@ const MyDelegatedCard = ({
         handleShow: handleShowRedelegate,
         handleClose: handleCloseRedelegate,
     } = useShowModal();
-    const { delegation } = delegate;
+    const { delegation, balance } = delegate;
 
     return (
         <Card>
@@ -47,7 +47,7 @@ const MyDelegatedCard = ({
                 <Card.Text>
                     Balance:{' '}
                     {formatMinimalDenomToCoinDenom(
-                        Number(delegation.shares),
+                        Number(balance.amount),
                         chain.coinDenom,
                     )}
                 </Card.Text>

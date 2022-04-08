@@ -6,8 +6,8 @@ export const CHAIN_LIST_MAINNET: IChainList[] = [
         chainId: 'kichain-2',
         coinDenom: 'XKI',
         coinMinimalDenom: 'uxki',
-        rpc: 'https://rpc-mainnet.blockchain.ki',
-        rest: 'https://api-mainnet.blockchain.ki',
+        rpc: 'https://rpc-mainnet.blockchain.ki:443',
+        rest: 'https://kichain-node.everstake.one/api',
     },
     // {
     //     name: 'cosmos',
@@ -44,12 +44,12 @@ export const CHAIN_LIST_TESTNET = [
         rest: 'http://198.50.215.1:3327',
         rpc: 'http://198.50.215.1:36657',
     },
-    {
-        name: 'Photon-testnet',
-        chainId: 'cosmoshub-testnet',
-        coinMinimalDenom: 'uphoton',
-        coinDenom: 'PHOTON',
-        rpc: 'https://rpc.testnet.cosmos.network:443',
-        rest: 'https://api.testnet.cosmos.network:443',
-    },
+    // {
+    //     name: 'Photon-testnet',
+    //     chainId: 'cosmoshub-testnet',
+    //     coinMinimalDenom: 'uphoton',
+    //     coinDenom: 'PHOTON',
+    //     rpc: 'https://rpc.testnet.cosmos.network:443',
+    //     rest: 'https://api.testnet.cosmos.network:443',
+    // },
 ];

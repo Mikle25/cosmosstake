@@ -1,5 +1,10 @@
-import { coin, SigningStargateClient, StdFee } from '@cosmjs/stargate';
-import { useCallback, useMemo, useState } from 'react';
+import {
+    coin,
+    GasPrice,
+    SigningStargateClient,
+    // StdFee,
+} from '@cosmjs/stargate';
+import { useCallback, useState } from 'react';
 import { IChainList } from '../interface/ChainList';
 import toastrHandle from '../utils/toastrHandle';
 import { toast } from 'react-toastify';
@@ -36,14 +41,14 @@ const useStargateSDK = (chain: IChainList) => {
     const [isLoading, setLoading] = useState<boolean>(false);
 
     // const gas_limit = '80000';
-    const gas_limit = useMemo(
-        () => (chain?.chainId === 'cosmoshub-testnet' ? '200000' : '80000'),
-        [chain],
-    );
-    const fee: StdFee = {
-        amount: [coin(1, 'uatom')],
-        gas: gas_limit,
-    };
+    // const gas_limit = useMemo(
+    //     () => (chain?.chainId === 'cosmoshub-testnet' ? '200000' : '1000000'),
+    //     [chain],
+    // );
+    // const fee: StdFee = {
+    //     amount: [coin(80000, 'uatom')],
+    //     gas: gas_limit,
+    // };
 
     const client = useCallback(async (): Promise<SigningStargateClient> => {
         const offlineSigner = window.getOfflineSigner(chain.chainId);
@@ -52,11 +57,16 @@ const useStargateSDK = (chain: IChainList) => {
         return await SigningStargateClient.connectWithSigner(
             chain.rpc,
             offlineSigner,
+            {
+                gasPrice: GasPrice.fromString('0.012uatom'),
+            },
         );
     }, [chain]);
 
     const Delegate = async ({ from, to, amount, denom }: IOption) => {
         const rpc = await client();
+
+        console.log(rpc);
         try {
             setLoading(true);
 
@@ -65,7 +75,7 @@ const useStargateSDK = (chain: IChainList) => {
                     from,
                     to,
                     coin(Math.floor(amount), denom),
-                    fee,
+                    'auto',
                 ),
             );
 
@@ -86,7 +96,7 @@ const useStargateSDK = (chain: IChainList) => {
                     from,
                     to,
                     coin(Math.floor(amount), denom),
-                    fee,
+                    'auto',
                 ),
             );
 
@@ -104,7 +114,7 @@ const useStargateSDK = (chain: IChainList) => {
         try {
             setLoading(true);
             const resp = await toastrHandle(
-                rpc.withdrawRewards(delegate, validator, fee),
+                rpc.withdrawRewards(delegate, validator, 'auto'),
             );
 
             handleErr(resp);
@@ -138,11 +148,7 @@ const useStargateSDK = (chain: IChainList) => {
             setLoading(true);
 
             const resp = await toastrHandle(
-                rpc.signAndBroadcast(
-                    'cosmos17ht88wh672df3r4eqh7qvtpnq692hh5ngy24qc',
-                    [msg],
-                    fee,
-                ),
+                rpc.signAndBroadcast(delegator, [msg], 'auto'),
             );
 
             handleErr(resp);
@@ -164,7 +170,7 @@ const useStargateSDK = (chain: IChainList) => {
     //         },
     //     };
     //
-    //     const resp = await rpc.signAndBroadcast(from, [msg], fee);
+    //     const resp = await rpc.signAndBroadcast(from, [msg], 'auto');
     //     console.log(resp);
     // };
 
@@ -178,3 +184,6 @@ const useStargateSDK = (chain: IChainList) => {
 };
 
 export default useStargateSDK;
+function getQueryClient(): any {
+    throw new Error('Function not implemented.');
+}

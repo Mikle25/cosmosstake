@@ -147,15 +147,16 @@ export const ChainInfos: ChainInfo[] = [
         },
     },
     {
-        rpc: 'https://rpc-mainnet.blockchain.ki',
-        rest: 'https://api-mainnet.blockchain.ki',
+        rpc: 'https://rpc-mainnet.blockchain.ki:443',
+        rest: 'https://kichain-node.everstake.one/api',
+        // rest: 'https://api-mainnet.blockchain.ki/',
         chainId: 'kichain-2',
         chainName: 'Ki',
         stakeCurrency: {
             coinDenom: 'XKI',
             coinMinimalDenom: 'uxki',
             coinDecimals: 6,
-            coinGeckoId: 'pool:uxki',
+            coinGeckoId: 'ki',
         },
         bip44: {
             coinType: 118,
@@ -166,7 +167,7 @@ export const ChainInfos: ChainInfo[] = [
                 coinDenom: 'XKI',
                 coinMinimalDenom: 'uxki',
                 coinDecimals: 6,
-                coinGeckoId: 'pool:uxki',
+                coinGeckoId: 'ki',
             },
         ],
         feeCurrencies: [
@@ -174,9 +175,14 @@ export const ChainInfos: ChainInfo[] = [
                 coinDenom: 'XKI',
                 coinMinimalDenom: 'uxki',
                 coinDecimals: 6,
-                coinGeckoId: 'pool:uxki',
+                coinGeckoId: 'ki',
             },
         ],
+        gasPriceStep: {
+            low: 0.01,
+            average: 0.025,
+            high: 0.03,
+        },
         features: ['stargate', 'ibc-transfer'],
     },
 ];
