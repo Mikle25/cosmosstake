@@ -27,8 +27,9 @@ const schema = yup.object().shape({
         })
         .test(
             'amount',
-            'Min value 1',
-            (val: any, props: any) => val >= props.parent.minDelegation,
+            'Min value 0.1',
+            // (val: any, props: any) => val >= props.parent.minDelegation,
+            (val: any) => val >= 0.1,
         ),
 });
 

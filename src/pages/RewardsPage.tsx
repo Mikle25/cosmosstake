@@ -1,9 +1,9 @@
 import React from 'react';
-import Delegations from '../components/dashboard/delegations/Delegations';
+import Delegations from '../components/rewards/delegations/Delegations';
 import { Tab, Tabs as BTabs } from 'react-bootstrap';
 import styled from 'styled-components';
-import Rewards from '../components/dashboard/rewards/Rewards';
-import UnbondingDelegations from '../components/dashboard/unbonding-delegations/UnbondingDelegations';
+import Rewards from '../components/rewards/rewards/Rewards';
+import UnbondingDelegations from '../components/rewards/unbonding-delegations/UnbondingDelegations';
 
 const Tabs = styled(BTabs)`
     margin-bottom: 20px;
@@ -23,7 +23,7 @@ const Tabs = styled(BTabs)`
     }
 `;
 
-const Dashboard = () => {
+const RewardsPage = () => {
     return (
         <div>
             <Tabs defaultActiveKey="delegation" id="uncontrolled-tab-example">
@@ -41,4 +41,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default RewardsPage;

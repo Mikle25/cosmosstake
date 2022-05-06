@@ -9,13 +9,16 @@ const CustomBox = styled(Box)`
     align-items: center;
     height: 50px;
     color: white;
+    position: sticky;
+    top: 100vh;
+    //z-index: -1;
 `;
 
 const AppFooter = () => {
     const isYear = new Date().getFullYear();
 
     return (
-        <CustomBox color="linear-gradient(0deg, #424a4f -3.02%, #131719 150.08%)">
+        <CustomBox color="transparent">
             <CustomContainer>
                 <span>© Everstake {isYear}. All rights reserved.</span>
             </CustomContainer>

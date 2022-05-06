@@ -1,22 +1,29 @@
 import { IChainList } from '../interface/ChainList';
+import cosmosIcon from '../assets/img/chainIcon/cosmos.svg';
+import kichain from '../assets/img/chainIcon/kichain.svg';
+import CosmosIcon from '../components/styled/icons/CosmosIcon';
+import KichainIcon from '../components/styled/icons/KichainIcon';
 
 export const CHAIN_LIST_MAINNET: IChainList[] = [
+    {
+        name: 'cosmos',
+        chainId: 'cosmoshub-4',
+        coinMinimalDenom: 'uatom',
+        coinDenom: 'ATOM',
+        icon: CosmosIcon,
+        rpc: 'https://rpc-cosmos.everstake.one',
+        rest: 'https://lcd-cosmos.everstake.one',
+        // rest: 'https://api.cosmos.network',
+    },
     {
         name: 'Ki',
         chainId: 'kichain-2',
         coinDenom: 'XKI',
         coinMinimalDenom: 'uxki',
-        rpc: 'https://rpc-mainnet.blockchain.ki:443',
+        icon: KichainIcon,
+        rpc: 'https://kichain-node.everstake.one/rpc/',
         rest: 'https://kichain-node.everstake.one/api',
     },
-    // {
-    //     name: 'cosmos',
-    //     chainId: 'cosmoshub',
-    //     coinMinimalDenom: 'uatom',
-    //     coinDenom: 'ATOM',
-    //     rpc: 'https://rpc-cosmoshub.keplr.app',
-    //     rest: 'https://lcd-cosmoshub.keplr.app',
-    // },
     // {
     //     name: 'osmosis',
     //     chainId: 'osmosis',
@@ -44,12 +51,4 @@ export const CHAIN_LIST_TESTNET = [
         rest: 'http://198.50.215.1:3327',
         rpc: 'http://198.50.215.1:36657',
     },
-    // {
-    //     name: 'Photon-testnet',
-    //     chainId: 'cosmoshub-testnet',
-    //     coinMinimalDenom: 'uphoton',
-    //     coinDenom: 'PHOTON',
-    //     rpc: 'https://rpc.testnet.cosmos.network:443',
-    //     rest: 'https://api.testnet.cosmos.network:443',
-    // },
 ];

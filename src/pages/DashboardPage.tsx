@@ -8,14 +8,22 @@ import useApi from '../hooks/useApi';
 import { store } from '../store';
 import { Spinner } from 'react-bootstrap';
 import { FlexJustifyCenter } from '../components/styled/Flex';
+import Divider from '../components/styled/Divider';
+import Stats from '../components/dashboard/Stats';
+
+const WrapperDashboard = styled.div`
+    height: 100vh;
+    overflow: scroll;
+    position: relative;
+`;
 
 const WrapperTable = styled.div`
-    background: white;
     height: 100vh;
+    margin: ${({ theme }) => theme.marginContainer};
     overflow: scroll;
 `;
 
-const Stake = () => {
+const DashboardPage = () => {
     const { chain } = useContext(store);
     const { API } = useApi(chain);
     const { resp, isLoading, request } = useRequest();
@@ -41,11 +49,7 @@ const Stake = () => {
             key: 'name',
             label: 'Name',
             process(data: any): JSX.Element {
-                return (
-                    <div style={{ width: '225px' }}>
-                        {data.description.moniker}
-                    </div>
-                );
+                return <div>{data.description.moniker}</div>;
             },
         },
         {
@@ -53,7 +57,7 @@ const Stake = () => {
             label: 'Voting power',
             process(data: any): JSX.Element {
                 return (
-                    <div style={{ width: '150px' }}>
+                    <div>
                         {formatToken(data.delegator_shares, chain.coinDenom)}
                     </div>
                 );
@@ -83,24 +87,28 @@ const Stake = () => {
         },
     ];
     return (
-        <>
-            {isLoading ? (
-                <FlexJustifyCenter>
-                    <Spinner
-                        animation="border"
-                        role="status"
-                        variant="primary"
-                    />
-                </FlexJustifyCenter>
-            ) : validators ? (
-                <WrapperTable>
+        <WrapperDashboard>
+            <Stats />
+
+            <Divider />
+
+            <WrapperTable>
+                {isLoading ? (
+                    <FlexJustifyCenter>
+                        <Spinner
+                            animation="border"
+                            role="status"
+                            variant="primary"
+                        />
+                    </FlexJustifyCenter>
+                ) : validators ? (
                     <Table cols={cols} rows={validators} />
-                </WrapperTable>
-            ) : (
-                <FlexJustifyCenter>Not validators</FlexJustifyCenter>
-            )}
-        </>
+                ) : (
+                    <FlexJustifyCenter>Not validators</FlexJustifyCenter>
+                )}
+            </WrapperTable>
+        </WrapperDashboard>
     );
 };
 
-export default Stake;
+export default DashboardPage;

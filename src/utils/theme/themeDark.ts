@@ -5,13 +5,11 @@ import border from './border';
 import size from './size';
 import transition from './transition';
 
-const vars = {
-    ...colors,
+export default {
+    ...colors.colorsDark,
     ...fs,
-    ...gradient,
-    ...border,
+    ...gradient.gradientDark,
+    ...border.borderDark,
     ...size,
     ...transition,
 };
-
-export default vars;

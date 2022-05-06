@@ -1,5 +1,4 @@
 import React from 'react';
-import { Table as BTable } from 'react-bootstrap';
 import Tbl from '../styled/Tbl';
 import Row from './Row';
 
@@ -14,7 +13,7 @@ const Table = ({ cols, rows }: TTable) => {
             {!rows.length && !rows ? (
                 <div>Not data</div>
             ) : (
-                <BTable>
+                <Tbl>
                     <Tbl.THead>
                         <Tbl.Tr h="60px">
                             {cols.map((elem) => (
@@ -27,7 +26,7 @@ const Table = ({ cols, rows }: TTable) => {
                             <Row key={i} index={i + 1} row={row} cols={cols} />
                         ))}
                     </Tbl.TBody>
-                </BTable>
+                </Tbl>
             )}
         </>
     );

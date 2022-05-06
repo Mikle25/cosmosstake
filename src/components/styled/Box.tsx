@@ -5,7 +5,7 @@ type TBox = {
 };
 
 const Box = styled.div<TBox>`
-    background: ${({ theme, color }) => color || theme.white};
+    background: ${({ theme, color }) => color || 'transparent'};
 `;
 
 export default Box;

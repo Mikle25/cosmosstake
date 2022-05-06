@@ -7,6 +7,15 @@ import { capitalizeLetters, convertIntToMutez } from '../../utils/helpers';
 import useStargateSDK from '../../hooks/useStargateSDK';
 import useApi from '../../hooks/useApi';
 import { store } from '../../store';
+import styled from 'styled-components';
+
+const BtnDelegation = styled(Button)`
+    color: ${({ theme }) => theme.main};
+
+    &:hover {
+        color: ${({ theme }) => theme.lightGreen};
+    }
+`;
 
 type TDelegationProps = {
     data: any;
@@ -42,9 +51,9 @@ const Delegate = ({ data }: TDelegationProps) => {
 
     return (
         <>
-            <Button variant="primary" onClick={handleShow}>
+            <BtnDelegation variant="outline-primary" onClick={handleShow}>
                 Delegation
-            </Button>
+            </BtnDelegation>
 
             <LayoutModal
                 handleClose={handleClose}

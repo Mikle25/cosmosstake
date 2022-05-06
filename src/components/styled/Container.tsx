@@ -3,9 +3,9 @@ import { Container } from 'react-bootstrap';
 
 export const CustomContainer = styled(Container)`
     margin: 0 auto;
-    max-width: 1400px;
+    max-width: 1440px;
 
-    @media (max-width: 1400px) {
-        padding: 0 10px;
+    @media (max-width: 1440px) {
+        padding: 0;
     }
 `;

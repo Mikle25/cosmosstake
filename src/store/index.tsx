@@ -8,11 +8,7 @@ interface IInitialState {
     account?: any;
 }
 
-const initialState: IInitialState = {};
-
-const store = createContext<any>({
-    state: initialState,
-});
+const store = createContext<any>({} as IInitialState);
 
 const { Provider } = store;
 
@@ -30,6 +26,8 @@ const StoreProvider: FC = ({ children }) => {
 
             if (bal.data.balances[0]) {
                 setBal(bal.data.balances[0]);
+            } else {
+                setBal(0);
             }
         } catch (e: any) {
             console.error(e);

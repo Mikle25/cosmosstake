@@ -10,7 +10,7 @@ export const formatPercent = (value: string | number | bigint): string => {
 
 export const capitalizeLetters = (text: string): string => {
     if (!text) return '';
-    return text.replace(text[0], text[0].toLocaleUpperCase());
+    return text.toLocaleUpperCase();
 };
 
 export const convertIntToMutez = (amount: number): number => {

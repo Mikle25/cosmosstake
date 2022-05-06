@@ -3,8 +3,11 @@ import { Bech32Address } from '@keplr-wallet/cosmos';
 
 export const ChainInfos: ChainInfo[] = [
     {
-        rpc: 'https://rpc-cosmoshub.keplr.app',
-        rest: 'https://lcd-cosmoshub.keplr.app',
+        // rpc: 'https://rpc-cosmoshub.keplr.app',
+        // rest: 'https://lcd-cosmoshub.keplr.app',
+        // rest: 'https://api.cosmos.network',
+        rpc: 'https://rpc-cosmos.everstake.one',
+        rest: 'https://lcd-cosmos.everstake.one',
         chainId: 'cosmoshub-4',
         chainName: 'Cosmos Hub',
         stakeCurrency: {
@@ -147,7 +150,8 @@ export const ChainInfos: ChainInfo[] = [
         },
     },
     {
-        rpc: 'https://rpc-mainnet.blockchain.ki:443',
+        // rpc: 'https://rpc-mainnet.blockchain.ki:443',
+        rpc: 'https://kichain-node.everstake.one/rpc/',
         rest: 'https://kichain-node.everstake.one/api',
         // rest: 'https://api-mainnet.blockchain.ki/',
         chainId: 'kichain-2',
