@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useMemo } from 'react';
-import { store } from '../../../store';
+import React, { useEffect, useMemo } from 'react';
+import { useKepler } from '../../../store';
 import useRequest from '../../../hooks/useRequest';
 import useApi from '../../../hooks/useApi';
 import { Spinner } from 'react-bootstrap';
@@ -8,13 +8,13 @@ import { WrapperDashboardInfo } from '../styles/WrapperDashboard';
 import UnbondingDelegationCard from './UnbondingDelegationCard';
 
 const UnbondingDelegations = () => {
-    const { chain, account } = useContext(store);
-    const { API } = useApi(chain);
+    const { account } = useKepler();
+    const { API } = useApi();
     const { request, resp, isLoading } = useRequest();
 
     useEffect(() => {
         if (account) {
-            request(API.getUnbondingDelegation, account.address);
+            request(API.getUnbondingDelegation, account);
         }
     }, [account]);
 

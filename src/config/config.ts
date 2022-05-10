@@ -2,43 +2,43 @@ import type { ChainInfo } from '@keplr-wallet/types';
 import { Bech32Address } from '@keplr-wallet/cosmos';
 
 export const ChainInfos: ChainInfo[] = [
-    {
-        // rpc: 'https://rpc-cosmoshub.keplr.app',
-        // rest: 'https://lcd-cosmoshub.keplr.app',
-        // rest: 'https://api.cosmos.network',
-        rpc: 'https://rpc-cosmos.everstake.one',
-        rest: 'https://lcd-cosmos.everstake.one',
-        chainId: 'cosmoshub-4',
-        chainName: 'Cosmos Hub',
-        stakeCurrency: {
-            coinDenom: 'ATOM',
-            coinMinimalDenom: 'uatom',
-            coinDecimals: 6,
-            coinGeckoId: 'cosmos',
-        },
-        bip44: {
-            coinType: 118,
-        },
-        bech32Config: Bech32Address.defaultBech32Config('cosmos'),
-        currencies: [
-            {
-                coinDenom: 'ATOM',
-                coinMinimalDenom: 'uatom',
-                coinDecimals: 6,
-                coinGeckoId: 'cosmos',
-            },
-        ],
-        feeCurrencies: [
-            {
-                coinDenom: 'ATOM',
-                coinMinimalDenom: 'uatom',
-                coinDecimals: 6,
-                coinGeckoId: 'cosmos',
-            },
-        ],
-        coinType: 118,
-        features: ['stargate', 'ibc-transfer', 'no-legacy-stdTx', 'ibc-go'],
-    },
+    // {
+    //     // rpc: 'https://rpc-cosmoshub.keplr.app',
+    //     // rest: 'https://lcd-cosmoshub.keplr.app',
+    //     // rest: 'https://api.cosmos.network',
+    //     rpc: 'https://rpc-cosmos.everstake.one',
+    //     rest: 'https://lcd-cosmos.everstake.one',
+    //     chainId: 'cosmoshub',
+    //     chainName: 'Cosmos Hub',
+    //     stakeCurrency: {
+    //         coinDenom: 'ATOM',
+    //         coinMinimalDenom: 'uatom',
+    //         coinDecimals: 6,
+    //         coinGeckoId: 'cosmos',
+    //     },
+    //     bip44: {
+    //         coinType: 118,
+    //     },
+    //     bech32Config: Bech32Address.defaultBech32Config('cosmos'),
+    //     currencies: [
+    //         {
+    //             coinDenom: 'ATOM',
+    //             coinMinimalDenom: 'uatom',
+    //             coinDecimals: 6,
+    //             coinGeckoId: 'cosmos',
+    //         },
+    //     ],
+    //     feeCurrencies: [
+    //         {
+    //             coinDenom: 'ATOM',
+    //             coinMinimalDenom: 'uatom',
+    //             coinDecimals: 6,
+    //             coinGeckoId: 'cosmos',
+    //         },
+    //     ],
+    //     coinType: 118,
+    //     features: ['stargate', 'ibc-transfer', 'no-legacy-stdTx', 'ibc-go'],
+    // },
     {
         chainId: 'vega-testnet',
         chainName: 'vega-testnet',

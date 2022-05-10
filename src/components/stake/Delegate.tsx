@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Button } from 'react-bootstrap';
 import LayoutModal from '../LayoutModal';
 import FormDelegate from './FormDelegate';
@@ -6,7 +6,7 @@ import useShowModal from '../../hooks/useShowModal';
 import { capitalizeLetters, convertIntToMutez } from '../../utils/helpers';
 import useStargateSDK from '../../hooks/useStargateSDK';
 import useApi from '../../hooks/useApi';
-import { store } from '../../store';
+import { useKepler } from '../../store';
 import styled from 'styled-components';
 
 const BtnDelegation = styled(Button)`
@@ -27,7 +27,7 @@ type THandleDelegateProps = {
 };
 
 const Delegate = ({ data }: TDelegationProps) => {
-    const { account, chain, setBalance } = useContext(store);
+    const { account, chain, setBalance } = useKepler();
 
     const { show, handleShow, handleClose } = useShowModal();
     const {
@@ -35,18 +35,18 @@ const Delegate = ({ data }: TDelegationProps) => {
         description,
         min_self_delegation,
     } = data;
-    const { Delegate } = useStargateSDK(chain);
-    const { API } = useApi(chain);
+    const { Delegate } = useStargateSDK();
+    const { API } = useApi();
 
     const handleDelegate = async ({ to, amount }: THandleDelegateProps) => {
         await Delegate({
-            from: account.address,
+            from: account,
             to,
             amount: convertIntToMutez(amount),
             denom: chain.coinMinimalDenom,
         });
 
-        await setBalance(account.address, API.getBalance);
+        await setBalance(account, API.getBalance);
     };
 
     return (

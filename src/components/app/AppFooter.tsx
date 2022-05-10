@@ -10,7 +10,7 @@ const CustomBox = styled(Box)`
     height: 50px;
     color: white;
     position: sticky;
-    top: 100vh;
+    top: 100%;
     //z-index: -1;
 `;
 

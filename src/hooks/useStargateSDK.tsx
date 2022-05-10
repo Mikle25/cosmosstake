@@ -5,9 +5,9 @@ import {
     // StdFee,
 } from '@cosmjs/stargate';
 import { useCallback, useState } from 'react';
-import { IChainList } from '../interface/ChainList';
 import toastrHandle from '../utils/toastrHandle';
 import { toast } from 'react-toastify';
+import { useKepler } from '../store';
 
 export interface IOption {
     from: string;
@@ -37,7 +37,8 @@ const handleErr = (resp: any) => {
     }
 };
 
-const useStargateSDK = (chain: IChainList) => {
+const useStargateSDK = () => {
+    const { chain } = useKepler();
     const [isLoading, setLoading] = useState<boolean>(false);
 
     // const gas_limit = '80000';
@@ -66,7 +67,6 @@ const useStargateSDK = (chain: IChainList) => {
     const Delegate = async ({ from, to, amount, denom }: IOption) => {
         const rpc = await client();
 
-        console.log(rpc);
         try {
             setLoading(true);
 
@@ -184,6 +184,3 @@ const useStargateSDK = (chain: IChainList) => {
 };
 
 export default useStargateSDK;
-function getQueryClient(): any {
-    throw new Error('Function not implemented.');
-}

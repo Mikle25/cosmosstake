@@ -1,6 +1,4 @@
 import { IChainList } from '../interface/ChainList';
-import cosmosIcon from '../assets/img/chainIcon/cosmos.svg';
-import kichain from '../assets/img/chainIcon/kichain.svg';
 import CosmosIcon from '../components/styled/icons/CosmosIcon';
 import KichainIcon from '../components/styled/icons/KichainIcon';
 

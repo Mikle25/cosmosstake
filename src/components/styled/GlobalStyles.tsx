@@ -3,18 +3,16 @@ import nats from '../../assets/fonts/nats.ttf';
 
 export default createGlobalStyle`
   @font-face {
-    font-family: 'Nats';
+    font-family: 'Roboto Light';
     src: url(${nats}) format('truetype');
-    font-weight: 400;
-    font-style: normal;
   }
   body {
     margin: 0;
-    font-family: 'Nats',  sans-serif;
+    min-height: 100vh;
+    box-sizing: border-box;
+    font-family: 'Nats', sans-serif;
     font-size: 14px;
     color: white;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
   
   h1, h2, h3, h4, h5, ul {
@@ -23,5 +21,9 @@ export default createGlobalStyle`
   
   a {
     text-decoration: none;
+  }
+  
+  input, button {
+    border: none;
   }
 `;

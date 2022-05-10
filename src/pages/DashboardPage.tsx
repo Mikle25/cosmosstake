@@ -1,31 +1,23 @@
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import styled from 'styled-components';
 import Table from '../components/table/Table';
 import useRequest from '../hooks/useRequest';
 import { formatToken, formatPercent } from '../utils/helpers';
 import Delegate from '../components/stake/Delegate';
 import useApi from '../hooks/useApi';
-import { store } from '../store';
+import { useKepler } from '../store';
 import { Spinner } from 'react-bootstrap';
 import { FlexJustifyCenter } from '../components/styled/Flex';
 import Divider from '../components/styled/Divider';
 import Stats from '../components/dashboard/Stats';
 
-const WrapperDashboard = styled.div`
-    height: 100vh;
-    overflow: scroll;
-    position: relative;
-`;
-
 const WrapperTable = styled.div`
-    height: 100vh;
     margin: ${({ theme }) => theme.marginContainer};
-    overflow: scroll;
 `;
 
 const DashboardPage = () => {
-    const { chain } = useContext(store);
-    const { API } = useApi(chain);
+    const { chain } = useKepler();
+    const { API } = useApi();
     const { resp, isLoading, request } = useRequest();
 
     useEffect(() => {
@@ -87,7 +79,7 @@ const DashboardPage = () => {
         },
     ];
     return (
-        <WrapperDashboard>
+        <>
             <Stats />
 
             <Divider />
@@ -107,7 +99,7 @@ const DashboardPage = () => {
                     <FlexJustifyCenter>Not validators</FlexJustifyCenter>
                 )}
             </WrapperTable>
-        </WrapperDashboard>
+        </>
     );
 };
 

@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import useApi from '../../../hooks/useApi';
 import useRequest from '../../../hooks/useRequest';
 import MyDelegatedCard from './MyDelegatedCard';
 import { Spinner } from 'react-bootstrap';
-import { store } from '../../../store';
+import { useKepler } from '../../../store';
 import { FlexJustifyCenter } from '../../styled/Flex';
 import useStargateSDK, {
     IOption,
@@ -13,14 +13,14 @@ import { convertIntToMutez } from '../../../utils/helpers';
 import { WrapperDashboardInfo } from '../styles/WrapperDashboard';
 
 const Delegations = () => {
-    const { account, chain, setBalance } = useContext(store);
-    const { API } = useApi(chain);
+    const { account, setBalance } = useKepler();
+    const { API } = useApi();
     const { resp, request, isLoading } = useRequest();
-    const { Undelegate, Redelegate } = useStargateSDK(chain);
+    const { Undelegate, Redelegate } = useStargateSDK();
 
     useEffect(() => {
         if (account) {
-            request(API.getDelegations, account.address);
+            request(API.getDelegations, account);
         }
     }, [account]);
 
@@ -31,8 +31,8 @@ const Delegations = () => {
             amount: convertIntToMutez(amount),
             denom,
         });
-        await setBalance(account.address, API.getBalance);
-        await request(API.getDelegations, account.address);
+        await setBalance(account, API.getBalance);
+        await request(API.getDelegations, account);
     };
 
     const handleRedelegate = async ({
@@ -49,8 +49,8 @@ const Delegations = () => {
             amount: convertIntToMutez(amount),
             denom,
         });
-        await setBalance(account.address, API.getBalance);
-        await request(API.getDelegations, account.address);
+        await setBalance(account, API.getBalance);
+        await request(API.getDelegations, account);
     };
 
     const myDelegate = useMemo(() => {

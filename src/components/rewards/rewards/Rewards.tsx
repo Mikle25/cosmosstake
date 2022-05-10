@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useMemo } from 'react';
-import { store } from '../../../store';
+import React, { useEffect, useMemo } from 'react';
+import { useKepler } from '../../../store';
 import useApi from '../../../hooks/useApi';
 import useRequest from '../../../hooks/useRequest';
 import useStargateSDK from '../../../hooks/useStargateSDK';
@@ -16,21 +16,21 @@ const WrapperContent = styled(Flex)`
 `;
 
 const Rewards = () => {
-    const { account, chain, setBalance } = useContext(store);
-    const { API } = useApi(chain);
-    const { Claim } = useStargateSDK(chain);
-    const rewardsRequest: any = useRequest();
+    const { account, chain, setBalance } = useKepler();
+    const { API } = useApi();
+    const { Claim } = useStargateSDK();
+    const rewardsRequest = useRequest();
 
     useEffect(() => {
         if (account) {
-            rewardsRequest.request(API.getReward, account.address);
+            rewardsRequest.request(API.getReward, account);
         }
     }, [account]);
 
     const handleClaim = async (validator: string) => {
-        await Claim({ delegate: account.address, validator });
-        await rewardsRequest.request(API.getReward, account.address);
-        await setBalance(account.address, API.getBalance);
+        await Claim({ delegate: account, validator });
+        await rewardsRequest.request(API.getReward, account);
+        await setBalance(account, API.getBalance);
     };
 
     const rewards = useMemo(() => {

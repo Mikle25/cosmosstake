@@ -1,26 +1,45 @@
-import React, { createContext, FC, useMemo, useState } from 'react';
+import React, {
+    createContext,
+    FC,
+    useContext,
+    useMemo,
+    useState,
+    useEffect,
+} from 'react';
 import { CHAIN_LIST_MAINNET } from '../utils/constants';
 import { chooseAccount } from './methods/chooseAccount';
 import { IChainList } from '../interface/ChainList';
+import WalletProvider from './wallet';
 
 interface IInitialState {
-    chain?: IChainList;
+    chain: IChainList;
     account?: any;
+    balance?: any;
+    signedIn: boolean;
+    setAccount: (chain: IChainList) => Promise<void>;
+    setBalance: <T, H>(addr: T, handle: H) => Promise<void>;
 }
 
 const store = createContext<any>({} as IInitialState);
 
 const { Provider } = store;
 
+const DEFAULT_CHAIN = CHAIN_LIST_MAINNET[0];
+
 const StoreProvider: FC = ({ children }) => {
-    const [chain, setChain] = useState<any>();
-    const [account, setAcc] = useState();
+    const sessionStoreChain = sessionStorage.getItem('chain');
+
+    const [chain, setChain] = useState<IChainList>(
+        sessionStoreChain ? JSON.parse(sessionStoreChain) : DEFAULT_CHAIN,
+    );
+    const [account, setAcc] = useState(sessionStorage.getItem('address') || '');
     const [balance, setBal] = useState<number>(0);
+    const [signedIn, setSignedIn] = useState<boolean>();
 
     const setBalance = async (
         address: string,
         handleBalance: (address: string) => Promise<any>,
-    ) => {
+    ): Promise<void> => {
         try {
             const bal = await handleBalance(address);
 
@@ -35,21 +54,22 @@ const StoreProvider: FC = ({ children }) => {
     };
 
     const setAccount = async (chain: IChainList) => {
-        localStorage.setItem('chain', JSON.stringify(chain));
+        sessionStorage.setItem('chain', JSON.stringify(chain));
 
         setChain(chain);
 
         const account = await chooseAccount(chain);
-        setAcc(account);
+
+        setAcc(account.address);
+        sessionStorage.setItem('address', account.address);
     };
 
-    window.onload = async () => {
-        const localStoreChain = localStorage.getItem('chain');
-        if (typeof localStoreChain === 'string') {
-            const localChain = JSON.parse(localStoreChain);
-            await setAccount(localChain);
+    window.onload = () => {
+        if (window.keplr) {
+            setSignedIn(true);
+            setAccount(chain);
         } else {
-            await setAccount(CHAIN_LIST_MAINNET[0]);
+            setSignedIn(false);
         }
     };
 
@@ -60,10 +80,17 @@ const StoreProvider: FC = ({ children }) => {
             chain,
             account,
             balance,
+            signedIn,
         };
-    }, [chain, account, balance]);
+    }, [chain, account, balance, signedIn]);
 
-    return <Provider value={provider}>{children}</Provider>;
+    return (
+        <Provider value={provider}>
+            <WalletProvider>{children}</WalletProvider>
+        </Provider>
+    );
 };
 
 export { store, StoreProvider };
+
+export const useKepler = (): IInitialState => useContext(store);

@@ -54,6 +54,11 @@ const StakeWrapper = styled.div`
     position: relative;
 `;
 
+const ContentWrapper = styled.div`
+    overflow: auto;
+    height: 90vh;
+`;
+
 const LayoutDefault: FC = ({ children }) => {
     return (
         <Wrapper>
@@ -64,10 +69,10 @@ const LayoutDefault: FC = ({ children }) => {
                     <StakeWrapper>
                         <AppNavBar />
 
-                        <div>
+                        <ContentWrapper>
                             {children}
                             <AppFooter />
-                        </div>
+                        </ContentWrapper>
                     </StakeWrapper>
                 </CustomContainer>
             </div>

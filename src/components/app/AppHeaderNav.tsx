@@ -2,13 +2,14 @@ import React, { FC } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import useRoutes from './hooks/useRoutes';
+import { useKepler } from '../../store';
 
 const WrapperNav = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
     position: relative;
-    font-size: ${({ theme }) => theme.fs20};
+    font-size: ${({ theme }) => theme.fs16};
 `;
 
 const ListNav = styled.div`
@@ -22,16 +23,20 @@ const ConnectWallet = styled.div`
     width: 100%;
     text-align: end;
     padding-right: 50px;
+    text-transform: uppercase;
+    color: white;
     padding-bottom: ${({ theme }) => theme.paddingBHeader};
     border-bottom: ${({ theme }) => theme.defaultBorderNav};
 `;
 
 const CustomNavLink = styled(NavLink)`
     width: 240px;
+
     color: ${({ theme }) => theme.main};
     padding-bottom: ${({ theme }) => theme.paddingBHeader};
     border-bottom: ${({ theme }) => theme.defaultBorderNav};
     text-align: center;
+    text-transform: uppercase;
     transition: ${({ theme }) => theme.transitionCustom('all')};
 
     &.active-link {
@@ -48,6 +53,7 @@ const CustomNavLink = styled(NavLink)`
 
 const AppHeaderNav: FC = () => {
     const routes = useRoutes();
+    const { signedIn } = useKepler();
 
     return (
         <WrapperNav>
@@ -64,9 +70,19 @@ const AppHeaderNav: FC = () => {
                 ))}
             </ListNav>
 
-            <ConnectWallet>Connect wallet</ConnectWallet>
-
-            {/*<AppChainList />*/}
+            {signedIn ? (
+                <ConnectWallet>Keplr connected</ConnectWallet>
+            ) : (
+                <ConnectWallet>
+                    <a
+                        href="https://chrome.google.com/webstore/detail/keplr/dmkamcknogkgcdfhhbddcghachkejeap?hl=ru"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        <h5>Connect wallet</h5>
+                    </a>
+                </ConnectWallet>
+            )}
         </WrapperNav>
     );
 };

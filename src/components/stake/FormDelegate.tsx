@@ -18,19 +18,17 @@ interface IFormProps {
 }
 
 const schema = yup.object().shape({
-    amount: yup
-        .number()
-        .required('Required')
-        // .min(0.1, 'Minimum value is 0.1')
-        .test('amount', 'Max value is your balance', (val: any, props: any) => {
-            return val < props.parent.balance;
-        })
-        .test(
-            'amount',
-            'Min value 0.1',
-            // (val: any, props: any) => val >= props.parent.minDelegation,
-            (val: any) => val >= 0.1,
-        ),
+    amount: yup.number().required('Required'),
+    // .min(0.1, 'Minimum value is 0.1')
+    // .test('amount', 'Max value is your balance', (val: any, props: any) => {
+    //     return val < props.parent.balance;
+    // })
+    // .test(
+    //     'amount',
+    //     'Min value 0.1',
+    //     // (val: any, props: any) => val >= props.parent.minDelegation,
+    //     (val: any) => val >= 0.1,
+    // ),
 });
 
 const FormDelegate = ({

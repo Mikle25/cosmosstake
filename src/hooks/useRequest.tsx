@@ -4,7 +4,13 @@ export type TFunc = {
     (opt?: any): any;
 };
 
-const useRequest = () => {
+type RequestProps = {
+    request: (func: TFunc, opt?: any) => Promise<void>;
+    isLoading: boolean;
+    resp: any;
+};
+
+const useRequest = (): RequestProps => {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [resp, setResp] = useState<any>({});
 
@@ -16,6 +22,7 @@ const useRequest = () => {
             setResp(data.data);
         } catch (e: any) {
             console.error(e);
+            setResp({});
         } finally {
             setIsLoading(false);
         }

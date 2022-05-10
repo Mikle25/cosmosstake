@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { store } from '../../store';
+import { useKepler } from '../../store';
 import { CHAIN_LIST_MAINNET } from '../../utils/constants';
 import { capitalizeLetters } from '../../utils/helpers';
 import ThemeToggle from './ThemeToggle';
+import { IChainList } from '../../interface/ChainList';
 
 const WrapperList = styled.div`
     display: flex;
@@ -46,7 +47,7 @@ const Li = styled.li<{ activeitem: boolean }>`
     span {
         justify-self: center;
         fill: ${({ theme, activeitem }) =>
-            activeitem ? theme.balck : theme.main};
+            activeitem ? theme.black : theme.main};
         transition: ${({ theme }) => theme.transitionCustom('all')};
     }
 
@@ -76,9 +77,9 @@ const Li = styled.li<{ activeitem: boolean }>`
 `;
 
 const AppNavBar = () => {
-    const { setAccount, chain } = useContext(store);
+    const { setAccount, chain } = useKepler();
 
-    const handleSetAccount = (chooseChain: any) => {
+    const handleSetAccount = (chooseChain: IChainList) => {
         setAccount(chooseChain);
     };
 

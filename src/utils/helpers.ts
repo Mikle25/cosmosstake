@@ -13,12 +13,12 @@ export const capitalizeLetters = (text: string): string => {
     return text.toLocaleUpperCase();
 };
 
-export const convertIntToMutez = (amount: number): number => {
-    return amount * tokenMutez;
+export const convertIntToMutez = (amount: number | string): number => {
+    return +amount * tokenMutez;
 };
 
-export const convertMutezToInt = (amount: number): number => {
-    return amount / tokenMutez;
+export const convertMutezToInt = (amount: number | string): number => {
+    return +amount / tokenMutez;
 };
 
 export const ellipsis = (string: string, start = 12, end = -7): string => {
