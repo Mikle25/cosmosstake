@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Box from '../styled/Box';
 import { CustomContainer } from '../styled/Container';
 
-const CustomBox = styled(Box)`
+const CustomBox = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,7 +10,6 @@ const CustomBox = styled(Box)`
     color: white;
     position: sticky;
     top: 100%;
-    //z-index: -1;
 `;
 
 const AppFooter = () => {

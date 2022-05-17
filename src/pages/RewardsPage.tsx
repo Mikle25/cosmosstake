@@ -1,9 +1,6 @@
 import React from 'react';
-import Delegations from '../components/rewards/delegations/Delegations';
 import { Tab, Tabs as BTabs } from 'react-bootstrap';
 import styled from 'styled-components';
-import Rewards from '../components/rewards/rewards/Rewards';
-import UnbondingDelegations from '../components/rewards/unbonding-delegations/UnbondingDelegations';
 
 const Tabs = styled(BTabs)`
     margin-bottom: 20px;
@@ -26,17 +23,18 @@ const Tabs = styled(BTabs)`
 const RewardsPage = () => {
     return (
         <div>
-            <Tabs defaultActiveKey="delegation" id="uncontrolled-tab-example">
-                <Tab eventKey="delegation" title="My delegation">
-                    <Delegations />
-                </Tab>
-                <Tab eventKey="rewards" title="My rewards">
-                    <Rewards />
-                </Tab>
-                <Tab eventKey="unbonding" title="Unbonding delegations">
-                    <UnbondingDelegations />
-                </Tab>
-            </Tabs>
+            {/*<Tabs defaultActiveKey="delegation" id="uncontrolled-tab-example">*/}
+            {/*    <Tab eventKey="delegation" title="My delegation">*/}
+            {/*        <Delegations />*/}
+            {/*    </Tab>*/}
+            {/*    <Tab eventKey="rewards" title="My rewards">*/}
+            {/*        <Rewards />*/}
+            {/*    </Tab>*/}
+            {/*    <Tab eventKey="unbonding" title="Unbonding delegations">*/}
+            {/*        <UnbondingDelegations />*/}
+            {/*    </Tab>*/}
+            {/*</Tabs>*/}
+            Stats rewards
         </div>
     );
 };

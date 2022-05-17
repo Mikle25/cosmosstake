@@ -9,4 +9,6 @@ export interface IChainList {
     icon: FC<IconProps>;
     rest: string;
     rpc: string;
+    explorer: string;
+    yield?: number;
 }

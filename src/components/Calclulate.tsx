@@ -8,9 +8,10 @@ type CalcProps = {
 };
 
 const CalculateWrapper = styled.div<{ bg: string; fsColor: string }>`
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    display: grid;
+    //flex-direction: column;
+    grid-template-rows: 0.5fr 30% 1fr;
+    gap: 10%;
     padding: 30px 35px;
     width: 350px;
 

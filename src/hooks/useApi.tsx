@@ -1,26 +1,11 @@
 import { useMemo } from 'react';
 import axios from 'axios';
-import { IChainList } from '../interface/ChainList';
-import { CHAIN_LIST_MAINNET } from '../utils/constants';
 import { useKepler } from '../store';
 
 const useApi = () => {
     const { chain } = useKepler();
 
     const api = useMemo(() => {
-        // const sessionStoreChain = sessionStorage.getItem('chain');
-        // if (typeof sessionStoreChain === 'string') {
-        //     const sessionChain = JSON.parse(sessionStoreChain);
-        //     return axios.create({
-        //         baseURL: sessionChain.rest,
-        //         timeout: 30000,
-        //     });
-        // }
-        // return axios.create({
-        //     baseURL: chain.rest,
-        //     timeout: 30000,
-        // });
-
         return axios.create({
             baseURL: chain.rest,
             timeout: 30000,
@@ -31,6 +16,9 @@ const useApi = () => {
         getValidators() {
             // return api.get('/staking/validators');
             return api.get('/cosmos/staking/v1beta1/validators');
+        },
+        getValidator(validator: string) {
+            return api.get(`/cosmos/staking/v1beta1/validators/${validator}`);
         },
         getDelegations(address?: string) {
             return api.get(`/cosmos/staking/v1beta1/delegations/${address}`);

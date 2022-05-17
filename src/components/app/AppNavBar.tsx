@@ -98,7 +98,7 @@ const AppNavBar = () => {
 
                         {capitalizeLetters(blockchain.name)}
 
-                        <div>10%</div>
+                        <div>{blockchain.yield}%</div>
                     </Li>
                 ))}
             </ChainList>

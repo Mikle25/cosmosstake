@@ -1,14 +1,14 @@
-import colors from './colors';
+import size from './size';
 
 export default {
     borderLight: {
-        defaultBorderNav: '3px solid rgba(255, 255, 255, 1)',
-        activeBorderNav: `3px solid #000`,
+        defaultBorderNav: `${size.borderWidth} solid rgba(255, 255, 255, 1)`,
+        activeBorderNav: `${size.borderWidth} solid #000`,
     },
     borderDark: {
-        defaultBorderNav: '3px solid rgba(255, 255, 255, 0.1)',
-        activeBorderNav: `3px solid #E5FF80`,
+        defaultBorderNav: `${size.borderWidth} solid rgba(255, 255, 255, 0.1)`,
+        activeBorderNav: `${size.borderWidth} solid #E5FF80`,
     },
-    defaultBorderNav: '3px solid rgba(255, 255, 255, 0.1)',
-    activeBorderNav: `3px solid #E5FF80`,
+    defaultBorderNav: `${size.borderWidth} solid rgba(255, 255, 255, 0.1)`,
+    activeBorderNav: `${size.borderWidth} solid #E5FF80`,
 };

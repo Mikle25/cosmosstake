@@ -70,16 +70,25 @@ const useStargateSDK = () => {
         try {
             setLoading(true);
 
-            const resp = await toastrHandle(
-                rpc.delegateTokens(
-                    from,
-                    to,
-                    coin(Math.floor(amount), denom),
-                    'auto',
-                ),
+            // const resp = await toastrHandle(
+            //     rpc.delegateTokens(
+            //         from,
+            //         to,
+            //         coin(Math.floor(amount), denom),
+            //         'auto',
+            //     ),
+            // );
+
+            const resp = await rpc.delegateTokens(
+                from,
+                to,
+                coin(Math.floor(amount), denom),
+                'auto',
             );
 
             handleErr(resp);
+
+            return resp;
         } catch (e: any) {
             toast.error(e);
         } finally {
@@ -108,22 +117,22 @@ const useStargateSDK = () => {
         }
     };
 
-    const Claim = async ({ delegate, validator }: TClaimProps) => {
-        const rpc = await client();
-
-        try {
-            setLoading(true);
-            const resp = await toastrHandle(
-                rpc.withdrawRewards(delegate, validator, 'auto'),
-            );
-
-            handleErr(resp);
-        } catch (e: any) {
-            toast.error(e);
-        } finally {
-            setLoading(false);
-        }
-    };
+    // const Claim = async ({ delegate, validator }: TClaimProps) => {
+    //     const rpc = await client();
+    //
+    //     try {
+    //         setLoading(true);
+    //         const resp = await toastrHandle(
+    //             rpc.withdrawRewards(delegate, validator, 'auto'),
+    //         );
+    //
+    //         handleErr(resp);
+    //     } catch (e: any) {
+    //         toast.error(e);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
 
     const Redelegate = async ({
         delegator,
@@ -154,6 +163,35 @@ const useStargateSDK = () => {
             handleErr(resp);
         } catch (e: any) {
             toast.error(e);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const Claim = async (address: string, validatorsAddress: string[]) => {
+        const rpc = await client();
+
+        try {
+            setLoading(true);
+
+            const msg = validatorsAddress.map((elem) => {
+                return {
+                    typeUrl:
+                        '/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward',
+                    value: {
+                        delegatorAddress: address,
+                        validatorAddress: elem,
+                    },
+                };
+            });
+
+            const resp = await rpc.signAndBroadcast(address, msg, 'auto');
+
+            handleErr(resp);
+
+            return resp;
+        } catch (e) {
+            console.error(e);
         } finally {
             setLoading(false);
         }

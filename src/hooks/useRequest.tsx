@@ -5,7 +5,7 @@ export type TFunc = {
 };
 
 type RequestProps = {
-    request: (func: TFunc, opt?: any) => Promise<void>;
+    request: (func: TFunc, opt?: any) => Promise<any>;
     isLoading: boolean;
     resp: any;
 };
@@ -20,6 +20,8 @@ const useRequest = (): RequestProps => {
             const data = await func(opt);
 
             setResp(data.data);
+
+            return data.data;
         } catch (e: any) {
             console.error(e);
             setResp({});

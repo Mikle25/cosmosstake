@@ -3,6 +3,7 @@ const lightGreen = '#E5FF80';
 const white = '#fff';
 const error = 'rgba(254,129,129,0.9)';
 const gray = '#B0B0B0';
+const gray100 = '#22201F';
 
 export default {
     colorsLight: {
@@ -15,6 +16,7 @@ export default {
         error: error,
         divider: white,
         gray,
+        gray100,
         table: {
             th: white,
         },
@@ -30,18 +32,6 @@ export default {
             b90: '#076785',
             b100: '#0D4D61',
         },
-        // gray: {
-        //     g10: '#F5F8FA',
-        //     g20: '#E8EDF0',
-        //     g30: '#D5DBE0',
-        //     g40: '#C2C9CF',
-        //     g50: '#ADB4BA',
-        //     g60: '#8D9499',
-        //     g70: '#656D73',
-        //     g80: '#424A4F',
-        //     g90: '#292F33',
-        //     g100: '#131719',
-        // },
     },
     colorsDark: {
         black: black,
@@ -53,6 +43,7 @@ export default {
         error: error,
         divider: 'rgba(255, 255, 255, 0.1)',
         gray,
+        gray100,
         table: {
             th: gray,
         },
@@ -68,17 +59,5 @@ export default {
             b90: '#076785',
             b100: '#0D4D61',
         },
-        // gray: {
-        //     g10: '#F5F8FA',
-        //     g20: '#E8EDF0',
-        //     g30: '#D5DBE0',
-        //     g40: '#C2C9CF',
-        //     g50: '#ADB4BA',
-        //     g60: '#8D9499',
-        //     g70: '#656D73',
-        //     g80: '#424A4F',
-        //     g90: '#292F33',
-        //     g100: '#131719',
-        // },
     },
 };

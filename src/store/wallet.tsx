@@ -5,42 +5,61 @@ import React, {
     useMemo,
     useState,
     useEffect,
+    useCallback,
 } from 'react';
 import useApi from '../hooks/useApi';
-import useRequest from '../hooks/useRequest';
 import { useKepler } from './index';
 import { convertMutezToInt } from '../utils/helpers';
-
-type Balances = {
-    amount: string;
-};
+import useRequest from '../hooks/useRequest';
 
 interface WalletInitState {
     balance: string;
+    balanceLoading: boolean;
+    updateBalance: () => void;
 }
+
+const WalletInitState = {
+    balance: '0',
+    balanceLoading: false,
+};
 
 const WalletContext = createContext({} as WalletInitState);
 
 const WalletProvider: FC = ({ children }) => {
     const { account } = useKepler();
     const { API } = useApi();
-    const getBalance = useRequest();
+    const [balance, setBalance] = useState(WalletInitState.balance);
+    const [balanceLoading, setBalanceLoading] = useState(
+        WalletInitState.balanceLoading,
+    );
 
-    useEffect(() => {
-        if (account) {
-            getBalance.request(API.getBalance, account);
+    const updateBalance = useCallback(async () => {
+        try {
+            setBalanceLoading(true);
+            const bal = await API.getBalance(account);
+
+            if (bal.data.balances[0]) {
+                setBalance(`${convertMutezToInt(bal.data.balances[0].amount)}`);
+            } else {
+                setBalance('0');
+            }
+        } catch (e: any) {
+            console.error(e);
+            setBalance('0');
+        } finally {
+            setBalanceLoading(false);
         }
     }, [account]);
 
-    const balance = useMemo(() => {
-        if (!getBalance.resp.balances) return '0';
-
-        return `${convertMutezToInt(getBalance.resp.balances[0].amount)}`;
-    }, [getBalance.resp]);
+    useEffect(() => {
+        if (account) {
+            updateBalance();
+        }
+    }, [account]);
 
     const value = useMemo(() => {
-        return { balance };
-    }, [balance]);
+        return { balance, updateBalance, balanceLoading };
+    }, [balance, balanceLoading]);
     return (
         <WalletContext.Provider value={value}>
             {children}

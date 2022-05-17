@@ -1,20 +1,17 @@
-import React, { ChangeEvent, FC, useEffect, useState } from 'react';
+import React, { ChangeEvent, FC, useEffect, useMemo, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
-import Calclulate from '../Calclulate';
 import StatsEachInfo from './StatsEachInfo';
 import { Text } from '../styled/Text';
 import { useWallet } from '../../store/wallet';
-import {
-    convertMutezToInt,
-    formatMinimalDenomToCoinDenom,
-} from '../../utils/helpers';
+import StakeCard from './StakeCard';
+import RewardsCard from './RewardsCard';
+import { CURRENT_YIELD } from '../../utils/constants';
+import useApi from '../../hooks/useApi';
+import useRequest from '../../hooks/useRequest';
 import { useKepler } from '../../store';
-
-interface StyleProps {
-    bg: string;
-    fontColor: string;
-    borderColor: string;
-}
+import StakedInfo from './StakedInfo';
+import { ConvertToUSD } from './StatsStyles';
+import UnbondingInfo from './UnbondingInfo';
 
 const StatsWrapper = styled.div`
     display: grid;
@@ -24,46 +21,11 @@ const StatsWrapper = styled.div`
     margin: 20px ${({ theme }) => theme.marginContainer};
 `;
 
-const Input = styled.input<Partial<StyleProps>>`
-    padding: 5px 11px;
-
-    background: transparent;
-    font-size: ${({ theme }) => theme.fs36};
-    border-bottom-style: solid;
-    border-bottom-width: 3px;
-    border-bottom-color: ${({ borderColor }) => borderColor};
-    color: ${({ fontColor }) => fontColor};
-
-    &:focus-visible {
-        outline: none;
-    }
-`;
-
-const Btn = styled.button<Partial<StyleProps>>`
-    background: ${({ bg }) => bg};
-    padding: 16px 10px;
-    text-transform: uppercase;
-    color: ${({ fontColor }) => fontColor};
-    font-size: ${({ theme }) => theme.fs18};
-
-    &:disabled {
-        opacity: 0.5;
-    }
-`;
-
 const FlexVerticalCenter = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 20px;
-`;
-
-const ConvertToUSD = styled.div<{ color?: string; bgColor?: string }>`
-    padding: 4px 8px;
-    width: fit-content;
-    font-size: ${({ theme }) => theme.fs14};
-    color: ${({ theme, color }) => color ?? theme.black};
-    background: ${({ theme, bgColor }) => bgColor ?? theme.black};
 `;
 
 const Stats: FC = () => {
@@ -81,66 +43,52 @@ const Stats: FC = () => {
         }
     };
 
+    const monthlyReturns = useMemo(() => {
+        return `${(+currBalance * CURRENT_YIELD) / 12}`;
+    }, [currBalance]);
+
+    const annualEarning = useMemo(() => {
+        return `${+currBalance * CURRENT_YIELD}`;
+    }, [currBalance]);
+
     return (
         <>
             <StatsWrapper>
-                <div>
-                    <Calclulate
-                        title={'your rewards'}
-                        bg={theme.black}
-                        fontColor={theme.white}
-                    >
-                        <Input
-                            fontColor={theme.white}
-                            borderColor={'rgba(255, 255, 255, 0.5)'}
-                            value="10000"
-                        />
-                        <Btn bg={theme.lightGreen} fontColor={theme.black}>
-                            Claim reward
-                        </Btn>
-                    </Calclulate>
-                </div>
+                <RewardsCard />
 
-                <div>
-                    <Calclulate
-                        title={'your available balance'}
-                        bg={theme.white}
-                        fontColor={theme.black}
-                    >
-                        <Input
-                            // type="number"
-                            fontColor={theme.black}
-                            borderColor={theme.black}
-                            onChange={handleChangeBalance}
-                            value={currBalance}
-                        />
-                        <Btn bg={theme.black} fontColor={theme.white}>
-                            Stake now
-                        </Btn>
-                    </Calclulate>
-                </div>
+                <StakeCard
+                    currBalance={currBalance}
+                    availableBalance={balance}
+                    handleChangeBalance={handleChangeBalance}
+                />
 
                 <FlexVerticalCenter>
-                    <StatsEachInfo title={'monthly earning'} amount={'10000'}>
+                    <StatsEachInfo
+                        title={'monthly earning'}
+                        amount={monthlyReturns}
+                    >
                         <ConvertToUSD bgColor={theme.lightGreen}>
                             $100
                         </ConvertToUSD>
                     </StatsEachInfo>
-                    <StatsEachInfo title={'yearly earning'} amount={'2323232'}>
+                    <StatsEachInfo
+                        title={'annual earning'}
+                        amount={annualEarning}
+                    >
                         <ConvertToUSD bgColor={theme.lightGreen}>
                             $100
                         </ConvertToUSD>
                     </StatsEachInfo>
                 </FlexVerticalCenter>
 
-                <StatsEachInfo title={'unbonding tokens'} amount={'300402'}>
-                    <ConvertToUSD color={theme.lightGreen}>$100</ConvertToUSD>
-                </StatsEachInfo>
-                <StatsEachInfo title={'staked tokens'} amount={'1023002'}>
-                    <ConvertToUSD color={theme.lightGreen}>$100</ConvertToUSD>
-                </StatsEachInfo>
+                <UnbondingInfo />
+
+                <StakedInfo />
+
                 <StatsEachInfo title={'current yield'}>
-                    <Text fs={'36px'}>15%</Text>
+                    <Text color={theme.lightGreen} fs={'36px'}>
+                        {CURRENT_YIELD * 100}%
+                    </Text>
                 </StatsEachInfo>
             </StatsWrapper>
         </>

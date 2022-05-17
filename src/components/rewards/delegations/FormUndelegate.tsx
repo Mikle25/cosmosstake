@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form } from '../../styled/Form';
+import Form from '../../styled/Form';
 import { Button, InputGroup } from 'react-bootstrap';
 import { WrapperBtn } from '../../styled/Btn';
 import { convertMutezToInt } from '../../../utils/helpers';

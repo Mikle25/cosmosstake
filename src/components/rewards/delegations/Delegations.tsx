@@ -13,7 +13,7 @@ import { convertIntToMutez } from '../../../utils/helpers';
 import { WrapperDashboardInfo } from '../styles/WrapperDashboard';
 
 const Delegations = () => {
-    const { account, setBalance } = useKepler();
+    const { account } = useKepler();
     const { API } = useApi();
     const { resp, request, isLoading } = useRequest();
     const { Undelegate, Redelegate } = useStargateSDK();
@@ -31,7 +31,6 @@ const Delegations = () => {
             amount: convertIntToMutez(amount),
             denom,
         });
-        await setBalance(account, API.getBalance);
         await request(API.getDelegations, account);
     };
 
@@ -49,7 +48,6 @@ const Delegations = () => {
             amount: convertIntToMutez(amount),
             denom,
         });
-        await setBalance(account, API.getBalance);
         await request(API.getDelegations, account);
     };
 

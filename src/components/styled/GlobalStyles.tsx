@@ -1,18 +1,14 @@
 import { createGlobalStyle } from 'styled-components';
-import nats from '../../assets/fonts/nats.ttf';
 
 export default createGlobalStyle`
-  @font-face {
-    font-family: 'Roboto Light';
-    src: url(${nats}) format('truetype');
-  }
   body {
     margin: 0;
     min-height: 100vh;
     box-sizing: border-box;
-    font-family: 'Nats', sans-serif;
+    font-family: 'Montserrat', sans-serif;
     font-size: 14px;
     color: white;
+    letter-spacing: 0.05em;
   }
   
   h1, h2, h3, h4, h5, ul {
@@ -21,6 +17,10 @@ export default createGlobalStyle`
   
   a {
     text-decoration: none;
+  }
+  
+  ul {
+    padding-left: 0;
   }
   
   input, button {

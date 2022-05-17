@@ -38,7 +38,7 @@ const StatsEachInfo: FC<StatsEachInfoProps> = (props) => {
             <Title isTheme={themeName}>{title}</Title>
             {amount && (
                 <AmountStyle>
-                    {formatMinimalDenomToCoinDenom(amount, chain.coinDenom)}
+                    {amount} {chain.coinDenom}
                 </AmountStyle>
             )}
             {children}

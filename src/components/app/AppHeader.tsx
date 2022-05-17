@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { CustomContainer } from '../styled/Container';
-import Box from '../styled/Box';
 import logoDark from '../../assets/img/logo-dark.svg';
 import logoLight from '../../assets/img/logo-light.svg';
 import logoDarkHover from '../../assets/img/logo-dark-hover.svg';
@@ -45,7 +44,7 @@ const LogoStyle = styled.div<{ themeName: string }>`
 const AppHeader = () => {
     const { themeName } = useThemeToggle();
     return (
-        <Box>
+        <div>
             <CustomContainer>
                 <TheHeader>
                     <WrapperLogo>
@@ -55,7 +54,7 @@ const AppHeader = () => {
                     <AppHeaderNav />
                 </TheHeader>
             </CustomContainer>
-        </Box>
+        </div>
     );
 };
 

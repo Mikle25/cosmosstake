@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import Table from '../components/table/Table';
 import useRequest from '../hooks/useRequest';
 import { formatToken, formatPercent } from '../utils/helpers';
-import Delegate from '../components/stake/Delegate';
+import Stake from '../components/stake/Stake';
 import useApi from '../hooks/useApi';
 import { useKepler } from '../store';
-import { Spinner } from 'react-bootstrap';
 import { FlexJustifyCenter } from '../components/styled/Flex';
 import Divider from '../components/styled/Divider';
 import Stats from '../components/dashboard/Stats';
+import Loader from '../components/Loader';
+import { IValidators } from '../interface/Validators';
 
 const WrapperTable = styled.div`
     margin: ${({ theme }) => theme.marginContainer};
@@ -26,7 +27,7 @@ const DashboardPage = () => {
         }
     }, [chain]);
 
-    const validators = useMemo(() => {
+    const validators = useMemo((): Array<IValidators> => {
         if (!Object.keys(resp)) return [];
 
         return resp.validators;
@@ -72,7 +73,7 @@ const DashboardPage = () => {
             process(data: any): JSX.Element {
                 return (
                     <div style={{ width: '80px' }}>
-                        <Delegate data={data} />
+                        <Stake data={data} />
                     </div>
                 );
             },
@@ -87,11 +88,7 @@ const DashboardPage = () => {
             <WrapperTable>
                 {isLoading ? (
                     <FlexJustifyCenter>
-                        <Spinner
-                            animation="border"
-                            role="status"
-                            variant="primary"
-                        />
+                        <Loader />
                     </FlexJustifyCenter>
                 ) : validators ? (
                     <Table cols={cols} rows={validators} />
