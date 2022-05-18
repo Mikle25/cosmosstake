@@ -16,7 +16,7 @@ const UnbondingInfo = () => {
     const theme = useTheme();
     const { account } = useKepler();
     const { API } = useApi();
-    const { request, resp } = useRequest();
+    const { request, resp, isLoading } = useRequest();
     const [daysLeft, setDaysLeft] = useState(0);
 
     useEffect(() => {
@@ -52,7 +52,11 @@ const UnbondingInfo = () => {
     }, [unbondingDelegations]);
 
     return (
-        <StatsEachInfo title={'unbonding tokens'} amount={totalUnbonding}>
+        <StatsEachInfo
+            title={'unbonding tokens'}
+            amount={totalUnbonding}
+            isLoading={isLoading}
+        >
             <FlexWithGap gap="10px">
                 <ConvertToUSD color={theme.lightGreen}>$100</ConvertToUSD>
                 <TextWrap color={theme.gray}>

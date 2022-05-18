@@ -13,6 +13,7 @@ export const CHAIN_LIST_MAINNET: IChainList[] = [
     //     icon: CosmosIcon,
     //     rpc: 'https://rpc-cosmos.everstake.one',
     //     rest: 'https://lcd-cosmos.everstake.one',
+    //     explorer: 'https://www.mintscan.io/cosmos/',
     //     yield: 15,
     //     // rest: 'https://api.cosmos.network',
     // },

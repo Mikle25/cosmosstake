@@ -3,7 +3,6 @@ import { StyleProps } from '../styled/types';
 import { Text } from '../styled/Text';
 
 export const Input = styled.input<Partial<StyleProps>>`
-    padding: 5px 11px;
     width: 100%;
     height: 100%;
 

@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useMemo, useState } from 'react';
 import { Input } from './StatsStyles';
 import { Btn } from '../styled/Btn';
-import Calclulate from '../Calclulate';
+import LayoutCard from '../LayoutCard';
 import { useTheme } from 'styled-components';
 import useShowModal from '../../hooks/useShowModal';
 import LayoutModal from '../LayoutModal';
@@ -17,20 +17,7 @@ import { FlexCenter } from '../styled/Flex';
 import FormClaim from '../forms/FormClaim';
 import { IValidators } from '../../interface/Validators';
 import { useWallet } from '../../store/wallet';
-
-export interface RewardsResp {
-    reward: Array<{
-        denom: string;
-        amount: string;
-    }>;
-    validator_address: string;
-}
-
-export interface ValidatorRewardResp {
-    validatorName: string;
-    address: string | string[];
-    value: string;
-}
+import { RewardsResp } from './types';
 
 const RewardsCard: FC = () => {
     const theme = useTheme();
@@ -102,32 +89,35 @@ const RewardsCard: FC = () => {
 
     return (
         <>
-            <Calclulate
+            <LayoutCard
                 title={'your rewards'}
                 bg={theme.black}
                 fontColor={theme.white}
             >
-                {isLoading || !Object.keys(rewards).length ? (
+                {isLoading ? (
                     <FlexCenter>
                         <Loader color="white" />
                     </FlexCenter>
                 ) : (
-                    <Input
-                        fontColor={theme.white}
-                        borderColor={'rgba(255, 255, 255, 0.5)'}
-                        value={rewardsInput}
-                        readOnly
-                    />
+                    <div>
+                        <Input
+                            fontColor={theme.white}
+                            borderColor={'rgba(255, 255, 255, 0.5)'}
+                            value={rewardsInput}
+                            readOnly
+                        />
+                    </div>
                 )}
 
                 <Btn
                     bg={theme.lightGreen}
                     fontColor={theme.black}
                     onClick={handleShow}
+                    disabled={!account}
                 >
                     Claim reward
                 </Btn>
-            </Calclulate>
+            </LayoutCard>
 
             <LayoutModal
                 handleClose={handleClose}

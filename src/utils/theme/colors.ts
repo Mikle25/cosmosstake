@@ -7,6 +7,7 @@ const gray100 = '#22201F';
 
 export default {
     colorsLight: {
+        bgColorTheme: white,
         black: black,
         white: white,
         main: black,
@@ -34,6 +35,7 @@ export default {
         },
     },
     colorsDark: {
+        bgColorTheme: black,
         black: black,
         white: '#fff',
         main: '#fff',

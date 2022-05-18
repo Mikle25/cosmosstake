@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useRef, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { ChevronDown } from 'react-bootstrap-icons';
-import { ValidatorRewardResp } from './dashboard/RewardsCard';
+import { ValidatorRewardResp } from './dashboard/types';
 
 interface SelectProps {
     data: Array<ValidatorRewardResp>;

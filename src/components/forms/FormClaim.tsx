@@ -5,7 +5,7 @@ import { useTheme } from 'styled-components';
 import { Text, Title } from '../styled/Text';
 import { FlexCustom } from '../styled/Flex';
 import Select from '../Select';
-import { ValidatorRewardResp } from '../dashboard/RewardsCard';
+import { ValidatorRewardResp } from '../dashboard/types';
 import { useKepler } from '../../store';
 import useStargateSDK from '../../hooks/useStargateSDK';
 import useGetExplorerTrx from '../../hooks/useGetExplorerTrx';

@@ -3,12 +3,14 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import useRoutes from './hooks/useRoutes';
 import { useKepler } from '../../store';
+import ConnectWallet from '../wallet/ConnectWallet';
 
 const WrapperNav = styled.div`
     display: flex;
     align-items: center;
     width: 100%;
     position: relative;
+    padding-top: 5px;
     font-size: ${({ theme }) => theme.fs16};
 `;
 
@@ -17,16 +19,6 @@ const ListNav = styled.div`
     align-items: center;
     width: 100%;
     height: 100%;
-`;
-
-const ConnectWallet = styled.div`
-    width: 100%;
-    text-align: end;
-    padding-right: 50px;
-    text-transform: uppercase;
-    color: white;
-    padding-bottom: ${({ theme }) => theme.paddingBHeader};
-    border-bottom: ${({ theme }) => theme.defaultBorderNav};
 `;
 
 const CustomNavLink = styled(NavLink)`
@@ -53,7 +45,6 @@ const CustomNavLink = styled(NavLink)`
 
 const AppHeaderNav: FC = () => {
     const routes = useRoutes();
-    const { signedIn } = useKepler();
 
     return (
         <WrapperNav>
@@ -70,19 +61,7 @@ const AppHeaderNav: FC = () => {
                 ))}
             </ListNav>
 
-            {signedIn ? (
-                <ConnectWallet>Keplr connected</ConnectWallet>
-            ) : (
-                <ConnectWallet>
-                    <a
-                        href="https://chrome.google.com/webstore/detail/keplr/dmkamcknogkgcdfhhbddcghachkejeap?hl=ru"
-                        target="_blank"
-                        rel="noreferrer"
-                    >
-                        <h5>Connect wallet</h5>
-                    </a>
-                </ConnectWallet>
-            )}
+            <ConnectWallet />
         </WrapperNav>
     );
 };

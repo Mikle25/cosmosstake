@@ -6,9 +6,6 @@ import { useWallet } from '../../store/wallet';
 import StakeCard from './StakeCard';
 import RewardsCard from './RewardsCard';
 import { CURRENT_YIELD } from '../../utils/constants';
-import useApi from '../../hooks/useApi';
-import useRequest from '../../hooks/useRequest';
-import { useKepler } from '../../store';
 import StakedInfo from './StakedInfo';
 import { ConvertToUSD } from './StatsStyles';
 import UnbondingInfo from './UnbondingInfo';
@@ -17,6 +14,7 @@ const StatsWrapper = styled.div`
     display: grid;
     grid-template-columns: repeat(2, 350px) 1fr;
     gap: 25px;
+    min-height: 300px;
 
     margin: 20px ${({ theme }) => theme.marginContainer};
 `;

@@ -1,6 +1,7 @@
 import { DefaultTheme } from 'styled-components';
 
 declare const themeDefault: {
+    bgColorTheme: string;
     activeBorderNav: string;
     barAndLogo: string;
     black: string;

@@ -15,7 +15,7 @@ const StakedInfo = () => {
     const { account } = useKepler();
     const { balance } = useWallet();
     const { API } = useApi();
-    const { resp, request } = useRequest();
+    const { resp, request, isLoading } = useRequest();
 
     useEffect(() => {
         if (account) {
@@ -40,7 +40,11 @@ const StakedInfo = () => {
     }, [myDelegate]);
 
     return (
-        <StatsEachInfo title={'staked tokens'} amount={totalStake}>
+        <StatsEachInfo
+            title={'staked tokens'}
+            amount={totalStake}
+            isLoading={isLoading}
+        >
             <FlexWithGap gap="10px">
                 <ConvertToUSD color={theme.lightGreen}>$100</ConvertToUSD>
 

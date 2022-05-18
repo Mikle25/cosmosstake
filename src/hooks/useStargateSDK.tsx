@@ -1,4 +1,5 @@
 import {
+    // calculateFee,
     coin,
     GasPrice,
     SigningStargateClient,
@@ -41,15 +42,10 @@ const useStargateSDK = () => {
     const { chain } = useKepler();
     const [isLoading, setLoading] = useState<boolean>(false);
 
-    // const gas_limit = '80000';
-    // const gas_limit = useMemo(
-    //     () => (chain?.chainId === 'cosmoshub-testnet' ? '200000' : '1000000'),
-    //     [chain],
+    // const fee = calculateFee(
+    //     200000,
+    //     GasPrice.fromString(`0.012${chain.coinMinimalDenom}`),
     // );
-    // const fee: StdFee = {
-    //     amount: [coin(80000, 'uatom')],
-    //     gas: gas_limit,
-    // };
 
     const client = useCallback(async (): Promise<SigningStargateClient> => {
         const offlineSigner = window.getOfflineSigner(chain.chainId);
@@ -59,7 +55,7 @@ const useStargateSDK = () => {
             chain.rpc,
             offlineSigner,
             {
-                gasPrice: GasPrice.fromString('0.012uatom'),
+                gasPrice: GasPrice.fromString(`0.012${chain.coinMinimalDenom}`),
             },
         );
     }, [chain]);

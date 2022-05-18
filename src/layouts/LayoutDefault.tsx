@@ -6,15 +6,9 @@ import AppNavBar from '../components/app/AppNavBar';
 import { CustomContainer } from '../components/styled/Container';
 import cosmosImg from '../assets/img/cosmos.svg';
 
-const Wrapper = styled.div`
+const BG = styled.div`
     z-index: 0;
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    color: ${({ theme }) => theme.main};
-    background: ${({ theme }) => theme.gradientBg};
-    overflow: hidden;
-    height: 100vh;
+    background-color: ${({ theme }) => theme.bgColorTheme};
 
     &:after {
         content: '';
@@ -26,9 +20,20 @@ const Wrapper = styled.div`
         background-image: url(${cosmosImg});
         background-size: 100% 100%;
         background-repeat: no-repeat;
-        opacity: 0.1;
+        opacity: 0.2;
         z-index: 0;
     }
+`;
+
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    color: ${({ theme }) => theme.main};
+    background: ${({ theme }) => theme.gradientBg};
+    overflow: hidden;
+    height: 100vh;
+
     //background-size: 100% 400%;
     //
     //animation: anim 15s linear infinite;
@@ -61,22 +66,25 @@ const ContentWrapper = styled.div`
 
 const LayoutDefault: FC = ({ children }) => {
     return (
-        <Wrapper>
-            <AppHeader />
+        <BG>
+            <Wrapper>
+                <AppHeader />
 
-            <div>
-                <CustomContainer>
-                    <StakeWrapper>
-                        <AppNavBar />
+                <div>
+                    <CustomContainer>
+                        <StakeWrapper>
+                            <AppNavBar />
 
-                        <ContentWrapper>
-                            {children}
-                            <AppFooter />
-                        </ContentWrapper>
-                    </StakeWrapper>
-                </CustomContainer>
-            </div>
-        </Wrapper>
+                            <ContentWrapper>
+                                <div>{children}</div>
+
+                                <AppFooter />
+                            </ContentWrapper>
+                        </StakeWrapper>
+                    </CustomContainer>
+                </div>
+            </Wrapper>
+        </BG>
     );
 };
 

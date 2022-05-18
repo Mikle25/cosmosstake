@@ -7,7 +7,7 @@ export default createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
-    color: white;
+    color: ${({ theme }) => theme.main}
     letter-spacing: 0.05em;
   }
   
@@ -17,6 +17,11 @@ export default createGlobalStyle`
   
   a {
     text-decoration: none;
+    color: ${({ theme }) => theme.main};
+
+    &:hover {
+      color: ${({ theme }) => theme.lightGreen}
+    }
   }
   
   ul {

@@ -1,12 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { CustomContainer } from '../styled/Container';
-import logoDark from '../../assets/img/logo-dark.svg';
-import logoLight from '../../assets/img/logo-light.svg';
-import logoDarkHover from '../../assets/img/logo-dark-hover.svg';
-import logoLightHover from '../../assets/img/logo-light-hover.svg';
+
 import AppHeaderNav from './AppHeaderNav';
-import { useThemeToggle } from '../../hooks/useThemeContext';
+import Logo from './Logo';
 
 const TheHeader = styled.div`
     display: flex;
@@ -16,40 +13,12 @@ const TheHeader = styled.div`
     height: 100%;
 `;
 
-const WrapperLogo = styled.div`
-    width: ${({ theme }) => theme.barAndLogo};
-    height: 40px;
-    margin: 0 42px 0 32px;
-`;
-
-const LogoStyle = styled.div<{ themeName: string }>`
-    width: 100%;
-    height: 100%;
-
-    //background-size: 100% 100%;
-    background-image: ${({ themeName }) =>
-        themeName === 'dark' ? `url(${logoDark})` : `url(${logoLight})`};
-    background-repeat: no-repeat;
-
-    transition: background 0.2s linear;
-
-    &:hover {
-        background-image: ${({ themeName }) =>
-            themeName === 'dark'
-                ? `url(${logoDarkHover})`
-                : `url(${logoLightHover})`};
-    }
-`;
-
 const AppHeader = () => {
-    const { themeName } = useThemeToggle();
     return (
         <div>
             <CustomContainer>
                 <TheHeader>
-                    <WrapperLogo>
-                        <LogoStyle themeName={themeName} />
-                    </WrapperLogo>
+                    <Logo />
 
                     <AppHeaderNav />
                 </TheHeader>

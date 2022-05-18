@@ -6,17 +6,12 @@ export default {
             'linear-gradient(130.04deg, #424a4f -19.42%, #1d2021 128.18%)',
         gradientTableHead:
             'linear-gradient(-45deg, rgba(66,74,79,0.6), rgba(29, 32, 33, 0.85) 0%)',
-        gradientBg: `radial-gradient(circle at 50% 50%,
-        transparent,
-        rgba(0,0,0,.7) 90%),
-        radial-gradient(circle at 0% 50%,
-        rgba(0,0,0,.2), transparent 90%),
-      radial-gradient(circle at 25% 75%,
-        #8f00ff,
-        transparent 70%),
-      radial-gradient(
-        #1371ff,
-        rgba(0,0,0,1) 90%);`,
+        gradientBg: `radial-gradient(
+            circle at 30% 90%,
+            rgba(143, 0, 255, 0.5),
+            transparent 50%
+        ),
+        radial-gradient(#1371ff, transparent 70%);`,
     },
     gradientLight: {
         gradientNav:
@@ -25,6 +20,7 @@ export default {
             'linear-gradient(130.04deg, #424a4f -19.42%, #1d2021 128.18%)',
         gradientTableHead:
             'linear-gradient(-45deg, rgba(66,74,79,0.6), rgba(29, 32, 33, 0.85) 0%)',
-        gradientBg: `radial-gradient(at 50% 50%, #8f00ff, transparent), radial-gradient(at 25% 95%, #ff9900, transparent 70%)`,
+        gradientBg: `radial-gradient(circle at 25% 95%, #ff9900, transparent 50%),
+        radial-gradient(#8f00ff, transparent 80%);`,
     },
 };

@@ -40,7 +40,7 @@ const StoreProvider: FC = ({ children }) => {
     window.onload = () => {
         if (window.keplr) {
             setSignedIn(true);
-            setAccount(chain);
+            // setAccount(chain);
         } else {
             setSignedIn(false);
         }

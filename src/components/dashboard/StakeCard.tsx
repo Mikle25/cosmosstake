@@ -1,7 +1,7 @@
 import React, { ChangeEvent, FC, useEffect, useMemo } from 'react';
 import { Btn } from '../styled/Btn';
 import LayoutModal from '../LayoutModal';
-import Calclulate from '../Calclulate';
+import LayoutCard from '../LayoutCard';
 import styled, { useTheme } from 'styled-components';
 import useShowModal from '../../hooks/useShowModal';
 import { Input } from './StatsStyles';
@@ -43,7 +43,7 @@ const listEverstakeAddress: IObjectKeys = {
 
 const StakeCard: FC<StakeCardProps> = (props) => {
     const { currBalance, handleChangeBalance, availableBalance } = props;
-    const { chain } = useKepler();
+    const { chain, account } = useKepler();
     const { balanceLoading } = useWallet();
     const theme = useTheme();
     const { handleShow, show, handleClose } = useShowModal();
@@ -66,7 +66,7 @@ const StakeCard: FC<StakeCardProps> = (props) => {
 
     return (
         <>
-            <Calclulate
+            <LayoutCard
                 title={'your available balance'}
                 bg={theme.white}
                 fontColor={theme.black}
@@ -93,7 +93,11 @@ const StakeCard: FC<StakeCardProps> = (props) => {
                     bg={theme.black}
                     fontColor={theme.white}
                     onClick={handleShow}
-                    disabled={+availableBalance < +currBalance || !currBalance}
+                    disabled={
+                        !account ||
+                        +availableBalance < +currBalance ||
+                        !currBalance
+                    }
                 >
                     Stake now
                 </Btn>
@@ -109,7 +113,7 @@ const StakeCard: FC<StakeCardProps> = (props) => {
                         currValue={currBalance}
                     />
                 </LayoutModal>
-            </Calclulate>
+            </LayoutCard>
         </>
     );
 };

@@ -1,7 +1,6 @@
 import { IChainList } from '../../interface/ChainList';
 import { ChainInfos } from '../../config/config';
 import { ChainInfo } from '@keplr-wallet/types';
-import { toast } from 'react-toastify';
 
 export const chooseAccount = async (currChain: IChainList) => {
     // if (!window.keplr || !window.getOfflineSigner) {

@@ -33,6 +33,7 @@ const LoadingText = styled.div<LoaderProps>`
         display: inline-block;
         margin: 0 5px;
         color: ${({ theme, color }) => color ?? theme.main};
+        font-size: ${({ theme, fs }) => fs ?? theme.fs16};
         filter: blur(0px);
         animation: bluer 2s infinite linear alternate;
 
