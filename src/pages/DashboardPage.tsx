@@ -13,7 +13,7 @@ import Loader from '../components/Loader';
 import { IValidators } from '../interface/Validators';
 
 const WrapperTable = styled.div`
-    margin: ${({ theme }) => theme.marginContainer};
+    margin: ${({ theme }) => `${theme.marginContainer} 0`};
 `;
 
 const DashboardPage = () => {

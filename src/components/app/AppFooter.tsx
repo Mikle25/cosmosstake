@@ -7,8 +7,8 @@ const CustomBox = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
-    margin-bottom: 20px;
-    padding: 0 63px;
+    //margin-bottom: 20px;
+    padding: 0 33px;
     color: ${({ theme }) => theme.main};
     position: sticky;
     top: 100%;

@@ -5,6 +5,7 @@ import { CHAIN_LIST_MAINNET } from '../../utils/constants';
 import { capitalizeLetters } from '../../utils/helpers';
 import ThemeToggle from './ThemeToggle';
 import { IChainList } from '../../interface/ChainList';
+import AdditionalInfo from './AdditionalInfo';
 
 const WrapperList = styled.div`
     display: flex;
@@ -102,6 +103,8 @@ const AppNavBar = () => {
                     </Li>
                 ))}
             </ChainList>
+
+            <AdditionalInfo />
 
             <ThemeToggle />
         </WrapperList>

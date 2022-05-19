@@ -16,7 +16,7 @@ const StatsWrapper = styled.div`
     gap: 25px;
     min-height: 300px;
 
-    margin: 20px ${({ theme }) => theme.marginContainer};
+    margin-bottom: ${({ theme }) => theme.marginContainer};
 `;
 
 const FlexVerticalCenter = styled.div`

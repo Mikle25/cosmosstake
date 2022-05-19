@@ -60,6 +60,7 @@ const StakeWrapper = styled.div`
 `;
 
 const ContentWrapper = styled.div`
+    padding: 30px;
     overflow: auto;
     height: 90vh;
 `;
@@ -76,7 +77,7 @@ const LayoutDefault: FC = ({ children }) => {
                             <AppNavBar />
 
                             <ContentWrapper>
-                                <div>{children}</div>
+                                {children}
 
                                 <AppFooter />
                             </ContentWrapper>
