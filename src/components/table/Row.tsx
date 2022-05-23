@@ -12,9 +12,11 @@ const Row = ({ row, cols, index }: TRow) => {
         <Tbl.Tr>
             {cols.map((col: any) =>
                 col.key === 'rank' ? (
-                    <td key={col.key}>{index}</td>
+                    <Tbl.Td key={col.key}>{index}</Tbl.Td>
                 ) : (
-                    <td key={col.key}>{col.process ? col.process(row) : ''}</td>
+                    <Tbl.Td key={col.key}>
+                        {col.process ? col.process(row) : ''}
+                    </Tbl.Td>
                 ),
             )}
         </Tbl.Tr>

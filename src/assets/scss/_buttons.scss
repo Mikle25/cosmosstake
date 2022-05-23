@@ -23,8 +23,12 @@
 }
 
 .btn-outline-primary {
+    color: $white;
+    border: none;
+    text-transform: uppercase;
     &:hover,
     &:not(:disabled):not(.disabled):active {
         color: $white;
+        background-color: transparent;
     }
 }

@@ -1,22 +1,33 @@
 import { IChainList } from '../interface/ChainList';
+import CosmosIcon from '../components/styled/icons/CosmosIcon';
+import KichainIcon from '../components/styled/icons/KichainIcon';
+
+export const CURRENT_YIELD = 0.15;
 
 export const CHAIN_LIST_MAINNET: IChainList[] = [
+    // {
+    //     name: 'cosmos',
+    //     chainId: 'cosmoshub-4',
+    //     coinMinimalDenom: 'uatom',
+    //     coinDenom: 'ATOM',
+    //     icon: CosmosIcon,
+    //     rpc: 'https://rpc-cosmos.everstake.one',
+    //     rest: 'https://lcd-cosmos.everstake.one',
+    //     explorer: 'https://www.mintscan.io/cosmos/',
+    //     yield: 15,
+    //     // rest: 'https://api.cosmos.network',
+    // },
     {
         name: 'Ki',
         chainId: 'kichain-2',
         coinDenom: 'XKI',
         coinMinimalDenom: 'uxki',
-        rpc: 'https://rpc-mainnet.blockchain.ki:443',
+        icon: KichainIcon,
+        rpc: 'https://kichain-node.everstake.one/rpc/',
         rest: 'https://kichain-node.everstake.one/api',
+        explorer: 'https://www.mintscan.io/ki-chain/',
+        yield: 28,
     },
-    // {
-    //     name: 'cosmos',
-    //     chainId: 'cosmoshub',
-    //     coinMinimalDenom: 'uatom',
-    //     coinDenom: 'ATOM',
-    //     rpc: 'https://rpc-cosmoshub.keplr.app',
-    //     rest: 'https://lcd-cosmoshub.keplr.app',
-    // },
     // {
     //     name: 'osmosis',
     //     chainId: 'osmosis',
@@ -33,23 +44,16 @@ export const CHAIN_LIST_MAINNET: IChainList[] = [
     //     rest: 'https://lcd-kava.keplr.app',
     //     rpc: 'https://rpc.kava.io',
     // },
-];
 
-export const CHAIN_LIST_TESTNET = [
-    {
-        name: 'vega-testnet',
-        chainId: 'vega-testnet',
-        coinMinimalDenom: 'uatom',
-        coinDenom: 'ATOM',
-        rest: 'http://198.50.215.1:3327',
-        rpc: 'http://198.50.215.1:36657',
-    },
+    // Testnet
     // {
-    //     name: 'Photon-testnet',
-    //     chainId: 'cosmoshub-testnet',
-    //     coinMinimalDenom: 'uphoton',
-    //     coinDenom: 'PHOTON',
-    //     rpc: 'https://rpc.testnet.cosmos.network:443',
-    //     rest: 'https://api.testnet.cosmos.network:443',
+    //     name: 'vega-testnet',
+    //     chainId: 'vega-testnet',
+    //     coinMinimalDenom: 'uatom',
+    //     coinDenom: 'ATOM',
+    //     rest: 'http://198.50.215.1:3327',
+    //     rpc: 'http://198.50.215.1:36657',
+    //     explorer: '',
+    //     icon: CosmosIcon,
     // },
 ];

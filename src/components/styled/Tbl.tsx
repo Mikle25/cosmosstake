@@ -4,8 +4,20 @@ import { Table as BTable } from 'react-bootstrap';
 const Tbl: any = styled(BTable)`
     margin-bottom: 0;
     text-align: center;
-    color: ${({ theme }) => theme.black};
-    background-color: white;
+    color: ${({ theme }) => theme.main};
+
+    & > :not(:first-child) {
+        border-top: none;
+    }
+
+    & thead,
+    tbody,
+    tfoot,
+    tr,
+    td,
+    th {
+        border-style: none;
+    }
 `;
 
 Tbl.Tr = styled.tr`
@@ -15,8 +27,8 @@ Tbl.Tr = styled.tr`
 
 Tbl.Th = styled.th`
     font-size: ${({ theme }) => theme.fs14};
-    color: ${({ theme }) => theme.gray.g20};
     text-transform: uppercase;
+    color: ${({ theme }) => theme.table.th};
 `;
 
 Tbl.THead = styled.thead`
@@ -24,11 +36,19 @@ Tbl.THead = styled.thead`
     position: sticky;
     top: 0;
     backdrop-filter: blur(5px);
-    background: ${({ theme }) => theme.gradientTableHead};
+    background: transparent;
 `;
 
 Tbl.TBody = styled.tbody`
-    border-color: rgba(128, 128, 128, 0.2);
+    border-color: transparent;
+
+    & > tr:hover {
+        background: rgba(255, 255, 255, 0.2);
+    }
+`;
+
+Tbl.Td = styled.td`
+    text-align: center;
 `;
 
 export default Tbl;

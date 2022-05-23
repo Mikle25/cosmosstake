@@ -1,20 +1,13 @@
 import { useMemo } from 'react';
 import axios from 'axios';
-import { IChainList } from '../interface/ChainList';
-import { CHAIN_LIST_MAINNET } from '../utils/constants';
+import { useKepler } from '../store';
 
-const useApi = (chain: IChainList) => {
+const useApi = () => {
+    const { chain } = useKepler();
+
     const api = useMemo(() => {
-        const localStoreChain = localStorage.getItem('chain');
-        if (typeof localStoreChain === 'string') {
-            const localChain = JSON.parse(localStoreChain);
-            return axios.create({
-                baseURL: localChain.rest,
-                timeout: 30000,
-            });
-        }
         return axios.create({
-            baseURL: CHAIN_LIST_MAINNET[0].rest,
+            baseURL: chain.rest,
             timeout: 30000,
         });
     }, [chain]);
@@ -23,6 +16,9 @@ const useApi = (chain: IChainList) => {
         getValidators() {
             // return api.get('/staking/validators');
             return api.get('/cosmos/staking/v1beta1/validators');
+        },
+        getValidator(validator: string) {
+            return api.get(`/cosmos/staking/v1beta1/validators/${validator}`);
         },
         getDelegations(address?: string) {
             return api.get(`/cosmos/staking/v1beta1/delegations/${address}`);

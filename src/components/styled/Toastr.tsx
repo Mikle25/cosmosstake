@@ -14,7 +14,7 @@ const Toastr = styled(ToastContainer)`
         background: ${({ theme }) => theme.blue.b10};
     }
     .Toastify__toast--success {
-        color: ${({ theme }) => theme.gray.g80};
+        color: ${({ theme }) => theme.gray};
         background: ${({ theme }) => theme.lightGreen};
     }
     .Toastify__toast--error {

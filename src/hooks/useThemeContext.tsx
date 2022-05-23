@@ -1,8 +1,6 @@
+import { ThemeToggleContext, ThemeContext } from '../store/theme';
 import { useContext } from 'react';
-import { ThemeContext } from 'styled-components';
 
-const useThemeContext = () => {
-    return useContext(ThemeContext);
+export const useThemeToggle = (): ThemeContext => {
+    return useContext(ThemeToggleContext);
 };
-
-export default useThemeContext;

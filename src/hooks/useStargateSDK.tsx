@@ -1,13 +1,14 @@
 import {
+    // calculateFee,
     coin,
     GasPrice,
     SigningStargateClient,
     // StdFee,
 } from '@cosmjs/stargate';
 import { useCallback, useState } from 'react';
-import { IChainList } from '../interface/ChainList';
 import toastrHandle from '../utils/toastrHandle';
 import { toast } from 'react-toastify';
+import { useKepler } from '../store';
 
 export interface IOption {
     from: string;
@@ -37,18 +38,14 @@ const handleErr = (resp: any) => {
     }
 };
 
-const useStargateSDK = (chain: IChainList) => {
+const useStargateSDK = () => {
+    const { chain } = useKepler();
     const [isLoading, setLoading] = useState<boolean>(false);
 
-    // const gas_limit = '80000';
-    // const gas_limit = useMemo(
-    //     () => (chain?.chainId === 'cosmoshub-testnet' ? '200000' : '1000000'),
-    //     [chain],
+    // const fee = calculateFee(
+    //     200000,
+    //     GasPrice.fromString(`0.012${chain.coinMinimalDenom}`),
     // );
-    // const fee: StdFee = {
-    //     amount: [coin(80000, 'uatom')],
-    //     gas: gas_limit,
-    // };
 
     const client = useCallback(async (): Promise<SigningStargateClient> => {
         const offlineSigner = window.getOfflineSigner(chain.chainId);
@@ -58,7 +55,7 @@ const useStargateSDK = (chain: IChainList) => {
             chain.rpc,
             offlineSigner,
             {
-                gasPrice: GasPrice.fromString('0.012uatom'),
+                gasPrice: GasPrice.fromString(`0.012${chain.coinMinimalDenom}`),
             },
         );
     }, [chain]);
@@ -66,20 +63,28 @@ const useStargateSDK = (chain: IChainList) => {
     const Delegate = async ({ from, to, amount, denom }: IOption) => {
         const rpc = await client();
 
-        console.log(rpc);
         try {
             setLoading(true);
 
-            const resp = await toastrHandle(
-                rpc.delegateTokens(
-                    from,
-                    to,
-                    coin(Math.floor(amount), denom),
-                    'auto',
-                ),
+            // const resp = await toastrHandle(
+            //     rpc.delegateTokens(
+            //         from,
+            //         to,
+            //         coin(Math.floor(amount), denom),
+            //         'auto',
+            //     ),
+            // );
+
+            const resp = await rpc.delegateTokens(
+                from,
+                to,
+                coin(Math.floor(amount), denom),
+                'auto',
             );
 
             handleErr(resp);
+
+            return resp;
         } catch (e: any) {
             toast.error(e);
         } finally {
@@ -108,22 +113,22 @@ const useStargateSDK = (chain: IChainList) => {
         }
     };
 
-    const Claim = async ({ delegate, validator }: TClaimProps) => {
-        const rpc = await client();
-
-        try {
-            setLoading(true);
-            const resp = await toastrHandle(
-                rpc.withdrawRewards(delegate, validator, 'auto'),
-            );
-
-            handleErr(resp);
-        } catch (e: any) {
-            toast.error(e);
-        } finally {
-            setLoading(false);
-        }
-    };
+    // const Claim = async ({ delegate, validator }: TClaimProps) => {
+    //     const rpc = await client();
+    //
+    //     try {
+    //         setLoading(true);
+    //         const resp = await toastrHandle(
+    //             rpc.withdrawRewards(delegate, validator, 'auto'),
+    //         );
+    //
+    //         handleErr(resp);
+    //     } catch (e: any) {
+    //         toast.error(e);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };
 
     const Redelegate = async ({
         delegator,
@@ -159,6 +164,35 @@ const useStargateSDK = (chain: IChainList) => {
         }
     };
 
+    const Claim = async (address: string, validatorsAddress: string[]) => {
+        const rpc = await client();
+
+        try {
+            setLoading(true);
+
+            const msg = validatorsAddress.map((elem) => {
+                return {
+                    typeUrl:
+                        '/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward',
+                    value: {
+                        delegatorAddress: address,
+                        validatorAddress: elem,
+                    },
+                };
+            });
+
+            const resp = await rpc.signAndBroadcast(address, msg, 'auto');
+
+            handleErr(resp);
+
+            return resp;
+        } catch (e) {
+            console.error(e);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     // const Delegate = async ({ from, to, amount, denom }: IOption) => {
     //     const rpc = await client();
     //     const msg = {
@@ -184,6 +218,3 @@ const useStargateSDK = (chain: IChainList) => {
 };
 
 export default useStargateSDK;
-function getQueryClient(): any {
-    throw new Error('Function not implemented.');
-}

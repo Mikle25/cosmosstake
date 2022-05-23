@@ -10,18 +10,18 @@ export const formatPercent = (value: string | number | bigint): string => {
 
 export const capitalizeLetters = (text: string): string => {
     if (!text) return '';
-    return text.replace(text[0], text[0].toLocaleUpperCase());
+    return text.toLocaleUpperCase();
 };
 
-export const convertIntToMutez = (amount: number): number => {
-    return amount * tokenMutez;
+export const convertIntToMutez = (amount: number | string): number => {
+    return +amount * tokenMutez;
 };
 
-export const convertMutezToInt = (amount: number): number => {
-    return amount / tokenMutez;
+export const convertMutezToInt = (amount: number | string): number => {
+    return +amount / tokenMutez;
 };
 
-export const ellipsis = (string: string, start = 12, end = -7): string => {
+export const ellipsis = (string: string, start = 5, end = -5): string => {
     if (!string) return '';
     return `${string.substr(0, start)}...${string.substr(end)}`;
 };
@@ -39,22 +39,22 @@ export const formatMinimalDenomToCoinDenom = (
 ): string => {
     const value = Number(val);
 
-    if (!value || 1 > value) return `0 ${coinDenom}`;
-    else if (value > 1000 * tokenMutez) {
+    if (!value || 1 > +value) return `0 ${coinDenom}`;
+    else if (+value > 1000 * tokenMutez) {
         return `${numeral(convertMutezToInt(value)).format(
             '0,[]',
         )} ${coinDenom}`;
-    } else if (value > 100 * tokenMutez) {
+    } else if (+value > 100 * tokenMutez) {
         return `${numeral(convertMutezToInt(value)).format(
             '0,0.[00]',
         )} ${coinDenom}`;
-    } else if (value > 10 * tokenMutez) {
+    } else if (+value > 10 * tokenMutez) {
         return `${numeral(convertMutezToInt(value)).format(
             tokenFormat,
         )} ${coinDenom}`;
-    } else if (value < tokenMutez) {
+    } else if (+value < tokenMutez) {
         return `${numeral(convertMutezToInt(value)).format(
-            '0,0.[000000000]',
+            '0,0.[000000]',
         )} ${coinDenom}`;
     }
 
@@ -65,4 +65,10 @@ export const formatDate = (date: string) => {
     if (!date) return '---';
 
     return moment(date).format('lll');
+};
+
+export const getNumberOfDays = (endDate: number): number => {
+    if (!endDate) return 0;
+
+    return moment(endDate).diff(moment(), 'days');
 };
