@@ -6,17 +6,17 @@ import { capitalizeLetters } from '../../utils/helpers';
 import ThemeToggle from './ThemeToggle';
 import { IChainList } from '../../interface/ChainList';
 import AdditionalInfo from './AdditionalInfo';
+import { FlexCustom } from '../styled/Flex';
 
 const WrapperList = styled.div`
     display: flex;
     flex-direction: column;
-    gap: 100px;
-    height: 100vh;
-    padding: 0 30px;
-    overflow: scroll;
+    justify-content: space-between;
+    height: 100%;
+    padding: 0 30px 50px;
     border-radius: 5px;
     background: transparent;
-    box-shadow: rgb(2 3 3 / 50%) 20px 20px 50px;
+    box-shadow: rgba(2, 3, 3, 0.4) 20px 20px 40px;
 `;
 
 const ChainList = styled.ul`
@@ -104,9 +104,11 @@ const AppNavBar = () => {
                 ))}
             </ChainList>
 
-            <AdditionalInfo />
+            <FlexCustom direction="column" gap="30px">
+                <AdditionalInfo />
 
-            <ThemeToggle />
+                <ThemeToggle />
+            </FlexCustom>
         </WrapperList>
     );
 };

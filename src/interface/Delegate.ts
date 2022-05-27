@@ -1,10 +1,11 @@
 export interface IDelegatedProps {
-    delegate: {
-        delegation: {
-            delegator_address: string;
-            shares: string;
-            validator_address: string;
-        };
-        balance: any;
+    delegation: {
+        delegator_address: string;
+        validator_address: string;
+        shares: string;
+    };
+    balance: {
+        denom: string;
+        amount: string;
     };
 }

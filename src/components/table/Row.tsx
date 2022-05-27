@@ -1,5 +1,5 @@
 import React from 'react';
-import Tbl from '../styled/Tbl';
+import { Tbl } from '../styled/Tbl';
 
 type TRow = {
     row: any;

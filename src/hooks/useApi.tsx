@@ -40,6 +40,11 @@ const useApi = () => {
                 // `/staking/delegators/${address}/unbonding_delegations`,
             );
         },
+        getDelegatorValidators(address: string) {
+            return api.get(
+                `/cosmos/staking/v1beta1/delegators/${address}/validators`,
+            );
+        },
     };
 
     return {

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { FlexWithGap } from '../styled/Flex';
 import Logo from './Logo';
 
@@ -7,7 +7,6 @@ const CustomBox = styled.div`
     display: flex;
     flex-direction: column;
     gap: 20px;
-    //margin-bottom: 20px;
     padding: 0 33px;
     color: ${({ theme }) => theme.main};
     position: sticky;
@@ -42,12 +41,18 @@ const listProjectEverstake = [
 ];
 
 const AppFooter = () => {
+    const theme = useTheme();
+
     return (
         <CustomBox color="transparent">
             <Logo margin="0" height="30px" />
             <span>
                 Cosmostake is created for simplify staking on Cosmos chaine.
-                Powered by <span>Everstake</span>, the co-developers of
+                Powered by{' '}
+                <a href={''} style={{ color: theme.lightGreen }}>
+                    Everstake
+                </a>
+                , the co-developers of
             </span>
 
             <FlexWithGap gap="20px">

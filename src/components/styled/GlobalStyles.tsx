@@ -7,7 +7,7 @@ export default createGlobalStyle`
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
     font-size: 14px;
-    color: ${({ theme }) => theme.main}
+    color: ${({ theme }) => theme.main};
     letter-spacing: 0.05em;
   }
   

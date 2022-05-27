@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { useTheme } from 'styled-components';
 import { NavLink } from 'react-router-dom';
 import { ReactComponent as SettingGear } from '../../assets/img/icons-additional-info/settings-gear.svg';
 import { ReactComponent as Smiley } from '../../assets/img/icons-additional-info/smiley.svg';
@@ -7,16 +7,25 @@ import { ReactComponent as Repo } from '../../assets/img/icons-additional-info/r
 import { ReactComponent as ZoomIn } from '../../assets/img/icons-additional-info/zoom-in.svg';
 import { ReactComponent as Comment } from '../../assets/img/icons-additional-info/comment.svg';
 import { FlexWithGap } from '../styled/Flex';
+import { useThemeToggle } from '../../hooks/useThemeContext';
 
-const AdditionalInfoWrap = styled.div`
+const AdditionalInfoWrap = styled.div<{ themeName: string }>`
     display: flex;
     flex-direction: column;
     gap: 15px;
 
     & span {
-        color: ${({ theme }) => theme.gray};
+        color: ${({ theme, themeName }) =>
+            themeName === 'dark' ? theme.gray : theme.white};
         text-transform: uppercase;
         letter-spacing: 0.1em;
+    }
+
+    & svg {
+        width: 20px;
+        height: 20px;
+        fill: ${({ theme, themeName }) =>
+            themeName === 'dark' ? theme.gray : theme.white};
     }
 `;
 
@@ -34,13 +43,7 @@ const LinkRoute = styled(NavLink)`
     }
 `;
 
-const IconWrap = styled.div`
-    & svg {
-        width: 20px;
-        height: 20px;
-        fill: ${({ theme }) => theme.gray};
-    }
-`;
+const IconWrap = styled.div``;
 
 const Links = [
     {
@@ -71,8 +74,10 @@ const Links = [
 ];
 
 const AdditionalInfo = () => {
+    const { themeName } = useThemeToggle();
+
     return (
-        <AdditionalInfoWrap>
+        <AdditionalInfoWrap themeName={themeName}>
             {Links.map((elem, i) => (
                 <LinkRoute
                     key={i}

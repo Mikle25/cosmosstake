@@ -9,6 +9,7 @@ import { CURRENT_YIELD } from '../../utils/constants';
 import StakedInfo from './StakedInfo';
 import { ConvertToUSD } from './StatsStyles';
 import UnbondingInfo from './UnbondingInfo';
+import { useThemeToggle } from '../../hooks/useThemeContext';
 
 const StatsWrapper = styled.div`
     display: grid;
@@ -16,7 +17,7 @@ const StatsWrapper = styled.div`
     gap: 25px;
     min-height: 300px;
 
-    margin-bottom: ${({ theme }) => theme.marginContainer};
+    margin: ${({ theme }) => theme.marginContainer};
 `;
 
 const FlexVerticalCenter = styled.div`
@@ -28,6 +29,7 @@ const FlexVerticalCenter = styled.div`
 
 const Stats: FC = () => {
     const theme = useTheme();
+    const { themeName } = useThemeToggle();
     const { balance } = useWallet();
     const [currBalance, setCurrBalance] = useState(balance);
 
@@ -84,7 +86,14 @@ const Stats: FC = () => {
                 <StakedInfo />
 
                 <StatsEachInfo title={'current yield'}>
-                    <Text color={theme.lightGreen} fs={'36px'}>
+                    <Text
+                        color={
+                            themeName === 'dark'
+                                ? theme.lightGreen
+                                : theme.black
+                        }
+                        fs={'36px'}
+                    >
                         {CURRENT_YIELD * 100}%
                     </Text>
                 </StatsEachInfo>

@@ -21,7 +21,6 @@ const LogoStyle = styled.div<{ themeName: string }>`
     width: 100%;
     height: 100%;
 
-    //background-size: 100% 100%;
     background-image: ${({ themeName }) =>
         themeName === 'dark' ? `url(${logoDark})` : `url(${logoLight})`};
     background-repeat: no-repeat;

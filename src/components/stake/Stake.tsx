@@ -31,7 +31,7 @@ const Stake: FC<TDelegationProps> = (props) => {
                 Delegation
             </BtnDelegation>
 
-            <LayoutModal handleClose={handleClose} show={show} title={'Stake'}>
+            <LayoutModal handleClose={handleClose} show={show}>
                 <FormDelegate handleClose={handleClose} data={data} />
             </LayoutModal>
         </>

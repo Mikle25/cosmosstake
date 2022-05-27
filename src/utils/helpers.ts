@@ -26,33 +26,26 @@ export const ellipsis = (string: string, start = 5, end = -5): string => {
     return `${string.substr(0, start)}...${string.substr(end)}`;
 };
 
-export const formatToken = (value: number, symbol = ''): string => {
-    if (!value) return '0';
-
-    const amount = Math.round(value);
-    return `${numeral(convertMutezToInt(amount)).format('0,0')} ${symbol}`;
-};
-
 export const formatMinimalDenomToCoinDenom = (
     val: number | string,
     coinDenom = '',
 ): string => {
     const value = Number(val);
 
-    if (!value || 1 > +value) return `0 ${coinDenom}`;
-    else if (+value > 1000 * tokenMutez) {
+    if (!value) return `0 ${coinDenom}`;
+    else if (value > 1000 * tokenMutez) {
         return `${numeral(convertMutezToInt(value)).format(
             '0,[]',
         )} ${coinDenom}`;
-    } else if (+value > 100 * tokenMutez) {
+    } else if (value > 100 * tokenMutez) {
         return `${numeral(convertMutezToInt(value)).format(
             '0,0.[00]',
         )} ${coinDenom}`;
-    } else if (+value > 10 * tokenMutez) {
+    } else if (value > 10 * tokenMutez) {
         return `${numeral(convertMutezToInt(value)).format(
             tokenFormat,
         )} ${coinDenom}`;
-    } else if (+value < tokenMutez) {
+    } else if (value < tokenMutez) {
         return `${numeral(convertMutezToInt(value)).format(
             '0,0.[000000]',
         )} ${coinDenom}`;

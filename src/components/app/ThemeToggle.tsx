@@ -12,6 +12,8 @@ const ThemeTogglerStyle = styled.div`
 `;
 
 const Moon = styled.div<ThemeProps>`
+    cursor: pointer;
+
     & svg {
         fill: ${({ theme, themeName }) =>
             themeName === 'dark' ? theme.lightGreen : theme.white};
@@ -19,6 +21,8 @@ const Moon = styled.div<ThemeProps>`
 `;
 
 const Sun = styled.div<ThemeProps>`
+    cursor: pointer;
+
     & svg {
         fill: ${({ theme, themeName }) =>
             themeName === 'light' ? theme.lightGreen : theme.white};
@@ -30,6 +34,7 @@ const Switcher = styled.div<ThemeProps>`
     width: 50px;
     height: 20px;
     color: white;
+    cursor: pointer;
 
     &:after {
         content: '';

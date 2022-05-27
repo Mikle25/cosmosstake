@@ -1,6 +1,10 @@
 import styled from 'styled-components';
 import { Table as BTable } from 'react-bootstrap';
 
+const WrapperTable = styled.div`
+    margin: ${({ theme }) => `${theme.marginContainer}`};
+`;
+
 const Tbl: any = styled(BTable)`
     margin-bottom: 0;
     text-align: center;
@@ -17,6 +21,7 @@ const Tbl: any = styled(BTable)`
     td,
     th {
         border-style: none;
+        text-transform: uppercase;
     }
 `;
 
@@ -29,6 +34,10 @@ Tbl.Th = styled.th`
     font-size: ${({ theme }) => theme.fs14};
     text-transform: uppercase;
     color: ${({ theme }) => theme.table.th};
+
+    &:first-child {
+        text-align: start;
+    }
 `;
 
 Tbl.THead = styled.thead`
@@ -49,6 +58,11 @@ Tbl.TBody = styled.tbody`
 
 Tbl.Td = styled.td`
     text-align: center;
+
+    &:first-child {
+        text-align: start;
+        width: 30%;
+    }
 `;
 
-export default Tbl;
+export { Tbl, WrapperTable };

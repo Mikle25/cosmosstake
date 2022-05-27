@@ -10,17 +10,23 @@ import React, {
 import useApi from '../hooks/useApi';
 import { useKepler } from './index';
 import { convertMutezToInt } from '../utils/helpers';
-import useRequest from '../hooks/useRequest';
+import { RewardsResp } from '../components/dashboard/types';
+import { IValidators } from '../interface/Validators';
+import { IDelegatedProps } from '../interface/Delegate';
 
 interface WalletInitState {
     balance: string;
     balanceLoading: boolean;
-    updateBalance: () => void;
+    updateBalance: () => Promise<void>;
+    // getStakedValidators: () => Promise<void>;
+    // isStaked: any[];
+    // stakedLoading: boolean;
 }
 
 const WalletInitState = {
     balance: '0',
     balanceLoading: false,
+    // stakedLoading: false,
 };
 
 const WalletContext = createContext({} as WalletInitState);
@@ -32,6 +38,10 @@ const WalletProvider: FC = ({ children }) => {
     const [balanceLoading, setBalanceLoading] = useState(
         WalletInitState.balanceLoading,
     );
+    // const [isStaked, setStaked] = useState([]);
+    // const [stakedLoading, setStakedLoading] = useState(
+    //     WalletInitState.stakedLoading,
+    // );
 
     const updateBalance = useCallback(async () => {
         try {
@@ -51,14 +61,59 @@ const WalletProvider: FC = ({ children }) => {
         }
     }, [account]);
 
+    // const getStakedValidators = useCallback(async () => {
+    //     try {
+    //         setStakedLoading(true);
+    //         const delegatedValidators = await API.getDelegatorValidators(
+    //             account,
+    //         );
+    //         const rewards = await API.getReward(account);
+    //         const staked = await API.getDelegations(account);
+    //
+    //         const all = delegatedValidators.data.validators.map(
+    //             (elem: IValidators) => {
+    //                 const rewardItem = rewards.data.rewards.find(
+    //                     (item: RewardsResp) =>
+    //                         item.validator_address === elem.operator_address,
+    //                 );
+    //
+    //                 const stakedItem = staked.data.delegation_responses.find(
+    //                     (item: IDelegatedProps) =>
+    //                         item.delegation.validator_address ===
+    //                         elem.operator_address,
+    //                 );
+    //                 return {
+    //                     ...elem,
+    //                     rewards: rewardItem,
+    //                     staked: stakedItem,
+    //                 };
+    //             },
+    //         );
+    //
+    //         setStaked(all);
+    //     } catch (e) {
+    //         console.error(e);
+    //     } finally {
+    //         setStakedLoading(false);
+    //     }
+    // }, [account]);
+
     useEffect(() => {
         if (account) {
             updateBalance();
+            // getStakedValidators();
         }
     }, [account]);
 
     const value = useMemo(() => {
-        return { balance, updateBalance, balanceLoading };
+        return {
+            balance,
+            updateBalance,
+            balanceLoading,
+            // getStakedValidators,
+            // isStaked,
+            // stakedLoading,
+        };
     }, [balance, balanceLoading]);
     return (
         <WalletContext.Provider value={value}>

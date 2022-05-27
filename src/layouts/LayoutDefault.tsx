@@ -5,24 +5,25 @@ import AppFooter from '../components/app/AppFooter';
 import AppNavBar from '../components/app/AppNavBar';
 import { CustomContainer } from '../components/styled/Container';
 import cosmosImg from '../assets/img/cosmos.svg';
+import Cosmos from '../components/Cosmos';
 
 const BG = styled.div`
     z-index: 0;
     background-color: ${({ theme }) => theme.bgColorTheme};
 
-    &:after {
-        content: '';
-        position: absolute;
-        bottom: 15%;
-        right: 10%;
-        width: 400px;
-        height: 400px;
-        background-image: url(${cosmosImg});
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        opacity: 0.2;
-        z-index: 0;
-    }
+    // &:after {
+    //     content: '';
+    //     position: absolute;
+    //     bottom: 15%;
+    //     right: 10%;
+    //     width: 400px;
+    //     height: 400px;
+    //     background-image: url(${cosmosImg});
+    //     background-size: 100% 100%;
+    //     background-repeat: no-repeat;
+    //     opacity: 0.2;
+    //     z-index: 0;
+    // }
 `;
 
 const Wrapper = styled.div`
@@ -34,7 +35,7 @@ const Wrapper = styled.div`
     overflow: hidden;
     height: 100vh;
 
-    //background-size: 100% 400%;
+    //background-size: 110% 110%;
     //
     //animation: anim 15s linear infinite;
     //
@@ -52,7 +53,8 @@ const Wrapper = styled.div`
 `;
 
 const StakeWrapper = styled.div`
-    z-index: 2;
+    height: 100%;
+    z-index: 10;
     display: grid;
     justify-content: center;
     grid-template-columns: ${({ theme }) => theme.barAndLogo} 1fr;
@@ -60,18 +62,29 @@ const StakeWrapper = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-    padding: 30px;
+    padding-bottom: 30px;
     overflow: auto;
     height: 90vh;
+`;
+
+const CosmosWrap = styled.div`
+    position: absolute;
+    z-index: 1;
+    bottom: 15%;
+    right: 10%;
 `;
 
 const LayoutDefault: FC = ({ children }) => {
     return (
         <BG>
+            <CosmosWrap>
+                <Cosmos />
+            </CosmosWrap>
+
             <Wrapper>
                 <AppHeader />
 
-                <div>
+                <div style={{ height: '100%' }}>
                     <CustomContainer>
                         <StakeWrapper>
                             <AppNavBar />

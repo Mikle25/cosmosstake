@@ -102,11 +102,7 @@ const StakeCard: FC<StakeCardProps> = (props) => {
                     Stake now
                 </Btn>
 
-                <LayoutModal
-                    handleClose={handleClose}
-                    show={show}
-                    title={'Stake'}
-                >
+                <LayoutModal handleClose={handleClose} show={show}>
                     <FormDelegate
                         data={validatorInfo}
                         handleClose={handleClose}

@@ -32,7 +32,7 @@ const RewardsCard: FC = () => {
     useEffect(() => {
         if (account) {
             request(API.getReward, account);
-            validators.request(API.getValidators);
+            validators.request(API.getDelegatorValidators, account);
         }
     }, [account, balance]);
 
@@ -122,7 +122,6 @@ const RewardsCard: FC = () => {
             <LayoutModal
                 handleClose={handleClose}
                 show={show}
-                title={'Claim rewards'}
                 styles={{ bg: theme.gray100, color: theme.white }}
             >
                 <FormClaim
